@@ -25,7 +25,6 @@ module.exports = {
             .setDescription(stripIndents`
             ${player.playing ? "▶️" : "⏸️"} **${title}** \`${msToTime(duration)}\` by ${author}
             `);
-
         return message.channel.send(embed);
         } catch (e) {
             console.log(`[ERR] ${e.message}`)
