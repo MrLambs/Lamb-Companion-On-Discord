@@ -1,27 +1,29 @@
-const { RichEmbed } = require("discord.js")
+const { MessageEmbed } = require("discord.js");
+const { getGuildPlayer } = require('../../util/functions/musicFunctions');
 
 module.exports = {
     config: {
         name: "queue",
-        aliases: ["q", "now"],
+        aliases: ["q"],
         description: "Displays what the current queue is.",
         accessableby: "Member",
         category: "music",
     },
     run: async (bot, message, args) => {
         try {
-        const player = bot.music.players.get(message.guild.id);
-        if (!player || !player.queue[0]) return message.channel.send("No song currently playing in this guild.");
+        const player = getGuildPlayer(bot, message)
+        
+        if (!player || !player.queue.current) return message.channel.send("No song currently playing in this guild.");
 
         let index = 1;
         let string = "";
 
-        if (player.queue[0]) string += `__**Currently Playing**__\n ${player.queue[0].title} - **Requested by ${player.queue[0].requester.username}**. \n`;
-        if (player.queue[1]) string += `__**Rest of queue:**__\n ${player.queue.slice(1, 10).map(x => `**${index++})** ${x.title} - **Requested by ${x.requester.username}**.`).join("\n")}`;
+        if (player.queue.current) string += `__**Currently Playing**__\n ${player.queue.current.title} - **Requested by ${player.queue.current.requester.username}**. \n`;
+        if (player.queue[0]) string += `__**Rest of queue:**__\n ${player.queue.slice(0, 10).map(x => `**${index++})** ${x.title} - **Requested by ${x.requester.username}**.`).join("\n")}`;
 
-        const embed = new RichEmbed()
+        const embed = new MessageEmbed()
             .setAuthor(`Current Queue for ${message.guild.name}`, message.guild.iconURL)
-            .setThumbnail(player.queue[0].thumbnail)
+            .setThumbnail(player.queue.current.thumbnail)
             .setColor("GREEN")
             .setDescription(string);
 

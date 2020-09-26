@@ -1,6 +1,6 @@
-const { Utils } = require("erela.js")
-const { RichEmbed } = require("discord.js")
-const { stripIndents } = require("common-tags")
+const { MessageEmbed } = require("discord.js");
+const { stripIndents } = require("common-tags");
+const { msToTime, getGuildPlayer } = require('../../util/functions/musicFunctions');
 
 module.exports = {
     config: {
@@ -11,19 +11,19 @@ module.exports = {
         category: "music",
     },
     run: async (bot, message, args) => {
-        const player = bot.music.players.get(message.guild.id);
+        const player = getGuildPlayer(bot, message);
         message.react(`${player.playing ? "▶️" : "⏸️"}`);
-        message.react('475742289378017280')
+        // message.react('475742289378017280')
         try {
-        if (!player || !player.queue[0]) return message.channel.send("No song/s currently playing within this guild.");
-        const { title, author, duration, thumbnail } = player.queue[0];
+        if (!player || !player.queue.current) return message.channel.send("No song(s) currently playing within this guild.");
+        const { title, author, duration, thumbnail } = player.queue.current;
 
-        const embed = new RichEmbed()
-            .setAuthor("Current Song Playing.", message.author.displayAvatarURL)
+        const embed = new MessageEmbed()
+            .setAuthor("Current Song", message.author.displayAvatarURL)
             .setThumbnail(thumbnail)
             .setColor("GREEN")
             .setDescription(stripIndents`
-            ${player.playing ? "▶️" : "⏸️"} **${title}** \`${Utils.formatTime(duration, true)}\` by ${author}
+            ${player.playing ? "▶️" : "⏸️"} **${title}** \`${msToTime(duration)}\` by ${author}
             `);
 
         return message.channel.send(embed);

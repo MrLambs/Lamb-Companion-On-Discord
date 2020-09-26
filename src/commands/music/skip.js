@@ -1,4 +1,5 @@
-const { RichEmbed } = require('discord.js')
+const { MessageEmbed } = require('discord.js');
+const { getGuildPlayer } = require('../../util/functions/musicFunctions');
 
 module.exports = {
     config: {
@@ -13,14 +14,14 @@ module.exports = {
         message.react('⏩')
         message.react('475742378028695562')
         try {
-        const player = bot.music.players.get(message.guild.id);
-        if (!player) return message.channel.send("No songs currently playing in this guild.");
+        const player = getGuildPlayer(bot, message)
+        if (!player) return message.channel.send(new MessageEmbed().setColor("RED").setDescription("No songs currently playing in this guild."));
 
-        const { voiceChannel } = message.member;
-        if (!voiceChannel || voiceChannel.id !== player.voiceChannel.id) return message.channel.send("You need to be in a voice channel to use the skip command.");
+        const voiceChannel = message.member.voice.channel;
+        if (!voiceChannel) return message.channel.send(new MessageEmbed().setColor("RED").setDescription("You need to be in a voice channel to use the skip command."));
 
         player.stop();
-        let skipEmbed = new RichEmbed()
+        let skipEmbed = new MessageEmbed()
         .setColor("GREEN")
         .setDescription(':white_check_mark: Skipped the current song!')
         return message.channel.send(skipEmbed);
