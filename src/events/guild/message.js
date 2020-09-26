@@ -20,7 +20,7 @@ module.exports = async (bot, message) => {
         }
     } else {
         let lambiesToAdd = Math.ceil(Math.random() * 5);
-        let xpToAdd = Math.ceil(Math.random() * 25);
+        let xpToAdd = Math.ceil(Math.random() * 15);
         User
             .findOne({ user_id: message.author.id }, (err, user) => {
                 if (err) console.log(`[ERR] ${err.message}`)

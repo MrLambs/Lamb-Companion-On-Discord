@@ -15,12 +15,14 @@
     "common-tags": "^1.8.0",
     "dateformat": "^3.0.3",
     "discord.js": "^12.3.1",
+    "erela.js": "^2.0.1",
     "esm": "^3.2.25",
     "fs": "0.0.1-security",
     "mathjs": "^7.2.0",
     "mongoose": "^5.10.6",
     "ms": "^2.1.2",
     "node-movie": "^3.0.0",
-    "nodemon": "^2.0.4"
+    "nodemon": "^2.0.4",
+    "radio-browser": "^2.1.3"
   }
 }
