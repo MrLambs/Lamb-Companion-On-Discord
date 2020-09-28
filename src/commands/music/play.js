@@ -62,8 +62,8 @@ module.exports = {
                             let srEmbed = new MessageEmbed()
                                 .setColor("GREEN")
                                 .setDescription(`Adding **${track.title}** \`${msToTime(track.duration)}\`to playlist.`)
-                            message.channel.send(srEmbed);
                             if (!player.playing) player.play();
+                            message.channel.send(srEmbed);
                         });
 
                         collector.on("end", (_, reason) => {
