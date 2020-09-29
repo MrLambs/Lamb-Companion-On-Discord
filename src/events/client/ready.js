@@ -1,18 +1,17 @@
 const { MessageEmbed } = require('discord.js');
-const { prefix, nodes } = require('../../util/jsons/config.json');
-const { Manager, Utils } = require('erela.js');
+const { prefix } = require('../../util/jsons/config.json');
+const { msToTime } = require('../../util/functions/musicFunctions');
 
 module.exports = async (bot) => {
-    console.log(`${bot.user.username} is online!`)
+    console.log(`[LOGS] ${bot.user.username} is online!`)
 
     bot.manager
-        .on('nodeConnect', () => console.log('Successfully created a new music node'))
+        .on('nodeConnect', () => console.log('[LOGS] Successfully created a new music node'))
         .on('nodeError', (node, err) => console.log(`[ERR] Node error: ${err.message}`))
         .on('trackStart', (player, track) => {
             let npEmbed = new MessageEmbed()
                 .setColor("GREEN")
-                .setDescription(`▶️ Now playing: **${track.title}** `)
-                // \`${Utils.formatTime(track.duration, true)}\`
+                .setDescription(`▶️ Now playing: **${track.title}** \`${msToTime(track.duration)}\``)
             bot.channels.cache
                 .get(player.textChannel)
                 .send(npEmbed)

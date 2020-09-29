@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const bot = new Client();
 
 ["commands", "aliases"].forEach(x => bot[x] = new Collection());
-["console", "command", "event"].forEach(x => require(`./handlers/${x}`)(bot));
+["command", "event"].forEach(x => require(`./handlers/${x}`)(bot));
 
 mongoose.connect(mongoURI, { useUnifiedTopology: true, useNewUrlParser: true, useFindAndModify: false })
     .then(() => console.log("[LOGS] MongoDB successfully connected!"))
