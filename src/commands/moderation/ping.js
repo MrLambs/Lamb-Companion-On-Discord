@@ -5,7 +5,7 @@ module.exports = {
         name: "ping",
         description: "PONG! Displays the api & bot latency",
         usage: ``,
-        accessableby: "Members",
+        accessibleby: "Members",
         aliases: ["latency"],
         category: "moderation"
     },

@@ -8,7 +8,7 @@ module.exports = {
         aliases: ['countdown'],
         usage: `(time)`,
         description: "Creates a countdown in chat!",
-        accessableby: "Members",
+        accessibleby: "Members",
         category: "misc"
     },
     async run(bot, message, args) {

@@ -9,7 +9,7 @@ module.exports = {
         description: "Play a song/playlist or search for a song from youtube",
         usage: "<input>",
         category: "music",
-        accessableby: "Member",
+        accessibleby: "Member",
         aliases: ["p"]
     },
     run: async (bot, message, args) => {

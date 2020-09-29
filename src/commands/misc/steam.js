@@ -9,9 +9,9 @@ module.exports = {
     config: {
         name: "steam",
         description: "Get steam statistics of a user",
-        usage: "<user>",
+        usage: "(username)",
         category: "misc",
-        accessableby: "Members"
+        accessibleby: "Members"
     },
     run: async (bot, message, args) => {
         try {

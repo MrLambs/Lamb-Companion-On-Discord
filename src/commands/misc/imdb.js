@@ -8,7 +8,7 @@ module.exports = {
         aliases: ["movie"],
         usage: `(movie or tv show)`,
         description: "Returns IMDB's information on your search term.",
-        accessableby: "Members",
+        accessibleby: "Members",
         category: "misc"
     },
     run: async (bot, message, args) => {

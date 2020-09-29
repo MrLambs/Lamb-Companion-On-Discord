@@ -1,8 +1,8 @@
-const { MessageEmbed } = require('discord.js');
 const mongoose = require('mongoose');
+const User = require('../../util/models/user');
+const { MessageEmbed } = require('discord.js');
 const { verifyBetAmount } = require('../../util/functions/casinoFunctions');
 const { getExampleCommand } = require('../../util/functions/chatFunctions');
-const User = require('../../util/models/user');
 const { fire_brick_red } = require('../../util/jsons/colors.json');
 
 module.exports = {

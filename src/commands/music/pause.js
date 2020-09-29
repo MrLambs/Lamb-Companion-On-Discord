@@ -8,7 +8,7 @@ module.exports = {
         name: "pause",
         aliases: ["resume"],
         description: "Makes the bot pause/resume the music currently playing.",
-        accessableby: "Member",
+        accessibleby: "Member",
         category: "music",
     },
     run: (bot, message, args) => {

@@ -8,7 +8,7 @@ module.exports = {
         name: "poll",
         description: "Can roll many dice from d4-d100 and factor in an added modifier for things.",
         usage: "(question)",
-        accessableby: "Member",
+        accessibleby: "Member",
         category: 'misc'
     },
     run: async (bot, message, args) => {

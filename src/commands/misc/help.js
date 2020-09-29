@@ -12,7 +12,7 @@ module.exports = {
         usage: "(command)",
         category: "misc",
         description: "Displays all commands that the bot has.",
-        accessableby: "Members"
+        accessibleby: "Members"
     },
     run: async (bot, message, args) => {
         try {

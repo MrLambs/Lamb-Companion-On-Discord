@@ -7,7 +7,7 @@ module.exports = {
         name: "nowplaying",
         aliases: ["np", "now"],
         description: "Displays what the bot is currently playing.",
-        accessableby: "Member",
+        accessibleby: "Member",
         category: "music",
     },
     run: async (bot, message, args) => {

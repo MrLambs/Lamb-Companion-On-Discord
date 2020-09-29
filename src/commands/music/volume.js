@@ -6,7 +6,7 @@ module.exports = {
         name: "volume",
         aliases: ["vol", "v"],
         description: "Adjusts the volume of the bot.",
-        accessableby: "Member",
+        accessibleby: "Member",
         category: "music",
         usage: "<input>"
     },

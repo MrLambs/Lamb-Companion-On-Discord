@@ -9,7 +9,7 @@ module.exports = {
         aliases: ['f'],
         usage: ``,
         description: "Spawns your fortune!",
-        accessableby: "Members",
+        accessibleby: "Members",
         category: "misc"
     },
     async run(bot, message, args) {
@@ -20,7 +20,7 @@ module.exports = {
                     let embed = new MessageEmbed()
                         .setColor(orange)
                         .setAuthor(`${message.author.username} just opened a fortune cookie!`, message.author.displayAvatarURL)
-                        .addField('Fortune:', `**${data.fortune.message}**`)
+                        .addField('Fortune:', `*${data.fortune.message}*`)
                         .addField('Lesson:', stripIndents`
 *__Chinese:__* ${data.lesson.chinese}
 

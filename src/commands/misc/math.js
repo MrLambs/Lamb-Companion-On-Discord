@@ -8,7 +8,7 @@ module.exports = {
         description: "Tells you the result of math problem.",
         usage: "(math-problem)",
         category: "misc",
-        accessableby: "Members",
+        accessibleby: "Members",
         aliases: ["calc"],
     },
 

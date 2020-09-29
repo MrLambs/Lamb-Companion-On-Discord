@@ -6,7 +6,7 @@ module.exports = {
         name: "queue",
         aliases: ["q"],
         description: "Displays what the current queue is.",
-        accessableby: "Member",
+        accessibleby: "Member",
         category: "music",
     },
     run: async (bot, message, args) => {

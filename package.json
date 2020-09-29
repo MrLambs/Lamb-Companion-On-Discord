@@ -21,6 +21,7 @@
     "mathjs": "^7.2.0",
     "mongoose": "^5.10.6",
     "ms": "^2.1.2",
+    "node-fetch": "^2.6.1",
     "node-movie": "^3.0.0",
     "nodemon": "^2.0.4"
   }

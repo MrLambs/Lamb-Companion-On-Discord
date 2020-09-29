@@ -9,7 +9,7 @@ module.exports = {
         aliases: ["magic8", "magic8ball"],
         usage: `(question)`,
         description: "Ask the magic 8ball what your fortune is",
-        accessableby: "Members",
+        accessibleby: "Members",
         category: "misc"
     },
     run: async (bot, message, args) => {

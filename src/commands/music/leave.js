@@ -5,7 +5,7 @@ module.exports = {
         name: "leave",
         aliases: ["lev", "stop"],
         description: "Makes the bot leave the voice channel.",
-        accessableby: "Member",
+        accessibleby: "Member",
         category: "music",
     },
     run: async (bot, message, args) => {
