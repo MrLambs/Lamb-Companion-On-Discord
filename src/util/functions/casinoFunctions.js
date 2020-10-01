@@ -1,4 +1,5 @@
 const User = require('../models/user');
+const { getEmoji } = require('./chatFunctions');
 
 const addWinnings = (amount, message) => {
     try {
@@ -46,9 +47,9 @@ const verifyBetAmount = (amount, message) => {
         })
 };
 
-const getRouletteResult = (playerChoice) => {
-    let redCircle = '🔴',
-    blackCircle = '⚫',
+const getRouletteResult = (bot, playerChoice) => {
+    let redCircle = getEmoji(bot, '727209313960984626'),
+    blackCircle = getEmoji(bot, '727209571038396537'),
     colorsArr = [blackCircle, redCircle],
     notEmojiColorsArr = ['black', 'red'],
     count = Math.floor(Math.random() * 25),

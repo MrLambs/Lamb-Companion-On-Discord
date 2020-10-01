@@ -24,6 +24,8 @@
     "ms": "^2.1.2",
     "node-fetch": "^2.6.1",
     "node-movie": "^3.0.0",
-    "nodemon": "^2.0.4"
+    "nodemon": "^2.0.4",
+    "oldschooljs": "^1.4.1",
+    "osrs-alchemy": "^2.0.1"
   }
 }

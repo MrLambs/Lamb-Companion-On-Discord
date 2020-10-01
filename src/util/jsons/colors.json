@@ -2,7 +2,7 @@
     "blue": "#093D84",
     "purple": "#A00E9B",
     "red": "#A20B2D",
-    "fire_brick_red": "#B22222",
+    "fire_brick_red": "#f71f13",
     "green": "#0EAD30",
     "yellow": "#D9E824",
     "orange": "#DE861D",
@@ -12,5 +12,7 @@
     "dandelion": "#ccc672",
     "logs_color": "#ADD8E6",
     "overwatch_orange": "#dd4f2b",
-    "medium_purple": "#877bb9"
+    "medium_purple": "#877bb9",
+    "medium_dark_purple": "#9877b4",
+    "light_salmon": "#f8a792"
 }

@@ -24,7 +24,7 @@ module.exports = {
             playerChoice = playerChoice.toLowerCase();
             try {
                 await deductBet(playerBet, message);
-                let rouletteGame = getRouletteResult(playerChoice);
+                let rouletteGame = getRouletteResult(bot, playerChoice);
                 await message.channel.send(`${rouletteGame.newMessage}`);
                 User.findOne({ user_id: message.author.id })
                 .then(user => {
