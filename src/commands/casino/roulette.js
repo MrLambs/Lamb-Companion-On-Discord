@@ -23,7 +23,6 @@ module.exports = {
             playerBet = Number(playerBet);
             playerChoice = playerChoice.toLowerCase();
             try {
-                await deductBet(playerBet, message);
                 let rouletteGame = getRouletteResult(bot, playerChoice);
                 await message.channel.send(`${rouletteGame.newMessage}`);
                 User.findOne({ user_id: message.author.id })
@@ -45,6 +44,7 @@ module.exports = {
                                     .addField('Result:', titleCase(rouletteGame.lastColor)))
                                     break;
                                 case 'lost':
+                                    await deductBet(playerBet, message);
                                     return message.channel.send(new MessageEmbed()
                                     .setColor(fire_brick_red)
                                     .setAuthor(message.author.username, message.author.displayAvatarURL({ format: 'png', dynamic: true }))
@@ -61,7 +61,6 @@ module.exports = {
                 })
             } catch (err) {
                 console.log(`[ERR] ${err.message}`);
-                returnBet(playerBet, message);
                 return message.channel.send(new MessageEmbed().setColor("RED").setDescription(`Oops, something went wrong. Your bet was returned. Please try again.`))
             }
         }

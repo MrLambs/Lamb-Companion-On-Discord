@@ -1,6 +1,7 @@
 const { MessageEmbed } = require('discord.js');
 const { prefix } = require('../../util/jsons/config.json');
 const { msToTime } = require('../../util/functions/musicFunctions');
+const { resetTripSpecificChannel } = require('../../util/functions/moderationFunctions');
 
 module.exports = async (bot) => {
     console.log(`[LOGS] ${bot.user.username} is online!`)
@@ -26,15 +27,19 @@ module.exports = async (bot) => {
             player.destroy()
         })
 
-        bot.manager.init(bot.user.id);
-        bot.levels = new Map()
+    bot.manager.init(bot.user.id);
+    bot.levels = new Map()
         .set("none", 0, 0)
         .set("low", 0.10)
         .set("medium", 0.15)
         .set("high", 0.25);
 
+    resetTripSpecificChannel(bot);
+
     let statuses = [
-        `${prefix}help`
+        `${prefix}help`,
+        `over ${bot.guilds.cache.size} servers`,
+        `over ${bot.users.cache.size} users`
     ]
 
     setInterval(function () {

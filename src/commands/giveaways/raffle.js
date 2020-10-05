@@ -4,14 +4,12 @@ module.exports = {
     config: {
         name: "raffle",
         aliases: ["giveaway"],
-        usage: `(time, for example: 60s or 2d) (number of winners) (prize)`,
+        usage: `[time, for example: 60s or 2d] [number of winners] [prize]`,
         description: "Start a giveaway with a custom prize and end date!",
         accessableby: "members",
         category: "giveaways"
     },
     run: async (bot, message, args) => {
-        // !giveaway 2d 1 Awesome prize!
-        // will create a giveaway with a duration of two days, with one winner and the prize will be "Awesome prize!"
         try {
             await message.delete()
             bot.giveawaysManager.start(message.channel, {
@@ -34,7 +32,7 @@ module.exports = {
                         minutes: "minutes",
                         hours: "hours",
                         days: "days",
-                        pluralS: false // Not needed, because units end with a S so it will automatically removed if the unit value is lower than 2
+                        pluralS: false
                     }
                 }
             });
