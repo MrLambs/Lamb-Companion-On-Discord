@@ -1,4 +1,3 @@
-const { Utils } = require("erela.js");
 const { MessageEmbed } = require("discord.js");
 const { stripIndents } = require("common-tags");
 const { createMusicPlayer, msToTime } = require('../../util/functions/musicFunctions');
@@ -17,11 +16,11 @@ module.exports = {
             message.react('▶️')
             // message.react('475742425625657348')    
             const voiceChannel = message.member.voice.channel;
-            if (!voiceChannel) return message.channel.send("You need to be in a voice channel to play music.");
+            if (!voiceChannel) return message.channel.send(new MessageEmbed().setColor("RED").setDescription(":x: You need to be in a voice channel to play music."));
             const permissions = voiceChannel.permissionsFor(bot.user);
-            if (!permissions.has("CONNECT")) return message.channel.send("I cannot connect to your voice channel, make sure I have permission to!");
-            else if (!permissions.has("SPEAK")) return message.channel.send("I cannot connect to your voice channel, make sure I have permission to!");
-            else if (!args[0]) return message.channel.send("Please provide a song name or link to search.");
+            if (!permissions.has("CONNECT")) return message.channel.send(new MessageEmbed().setColor("RED").setDescription(":x: I cannot connect to your voice channel, make sure I have permission to!"));
+            else if (!permissions.has("SPEAK")) return message.channel.send(new MessageEmbed().setColor("RED").setDescription(":x: I cannot connect to your voice channel, make sure I have permission to!"));
+            else if (!args[0]) return message.channel.send(new MessageEmbed().setColor("RED").setDescription(":x: Please provide a song name or link to search."));
 
             const player = createMusicPlayer(bot, message)
 
