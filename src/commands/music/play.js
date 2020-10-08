@@ -14,7 +14,6 @@ module.exports = {
     run: async (bot, message, args) => {
         try {
             message.react('▶️')
-            // message.react('475742425625657348')    
             const voiceChannel = message.member.voice.channel;
             if (!voiceChannel) return message.channel.send(new MessageEmbed().setColor("RED").setDescription(":x: You need to be in a voice channel to play music."));
             const permissions = voiceChannel.permissionsFor(bot.user);

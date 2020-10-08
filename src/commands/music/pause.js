@@ -15,7 +15,6 @@ module.exports = {
         const player = getGuildPlayer(bot, message);
         const { title, author, duration, thumbnail } = player.queue.current;
         message.react(`${player.playing ? "⏸️" : "▶️"}`);
-        // message.react('475742289378017280')
         try {
         let nsEmbed = new MessageEmbed()
         .setColor("RED")

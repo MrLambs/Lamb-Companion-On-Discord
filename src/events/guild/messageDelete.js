@@ -1,4 +1,4 @@
-const { MessageEmbed, Collection } = require('discord.js');
+const { MessageEmbed } = require('discord.js');
 const { logs_color } = require('../../util/jsons/colors.json');
 
 module.exports = async (bot, message) => {
