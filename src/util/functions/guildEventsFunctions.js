@@ -223,9 +223,178 @@ const determineRoleToAdd = (member, message, emoji, roles) => {
                 break;
         }
     }
-}
+};
+
+const determineRoleToRemove = (member, message, emoji, roles) => {
+    if (message.id === '711827068559818782') {
+        switch (emoji) {
+            case '🇦':
+                member.then(async mem => {
+                    await mem.roles.remove(roles.genericRoles.a);
+                    message.channel.send(`${mem}, you have been removed from the **${roles.genericRoles.a.name}** role!`).then(m => m.delete({ timeout: 5000 }))
+                })
+                break;
+            case '🇧':
+                member.then(async mem => {
+                    await mem.roles.remove(roles.genericRoles.b);
+                    message.channel.send(`${mem}, you have been removed from the **${roles.genericRoles.b.name}** role!`).then(m => m.delete({ timeout: 5000 }))
+                })
+                break;
+            case '🇨':
+                member.then(async mem => {
+                    await mem.roles.remove(roles.genericRoles.c);
+                    message.channel.send(`${mem}, you have been removed from the **${roles.genericRoles.c.name}** role!`).then(m => m.delete({ timeout: 5000 })
+                    )
+                })
+                break;
+            case '🇩':
+                member.then(async mem => {
+                    await mem.roles.remove(roles.genericRoles.d);
+                    message.channel.send(`${mem}, you have been removed from the **${roles.genericRoles.d.name}** role!`).then(m => m.delete({ timeout: 5000 })
+                    )
+                })
+                break;
+            case '🇪':
+                member.then(async mem => {
+                    await mem.roles.remove(roles.genericRoles.e);
+                    message.channel.send(`${mem}, you have been removed from the **${roles.genericRoles.e.name}** role!`).then(m => m.delete({ timeout: 5000 })
+                    )
+                })
+                break;
+            case '🇫':
+                member.then(async mem => {
+                    await mem.roles.remove(roles.genericRoles.f);
+                    message.channel.send(`${mem}, you have been removed from the **${roles.genericRoles.f.name}** role!`).then(m => m.delete({ timeout: 5000 })
+                    )
+                })
+                break;
+            case '🇬':
+                member.then(async mem => {
+                    await mem.roles.remove(roles.genericRoles.g);
+                    message.channel.send(`${mem}, you have been removed from the **${roles.genericRoles.g.name}** role!`).then(m => m.delete({ timeout: 5000 })
+                    )
+                })
+        }
+    } else if (message.id === '717853329656643584') {
+        switch (emoji) {
+            case 'Kreearra':
+                member.then(async mem => {
+                    await mem.roles.remove(roles.specificRoles.arma);
+                    message.channel.send(`${mem}, you have been removed from the **${roles.specificRoles.arma.name}** role!`).then(m => m.delete({ timeout: 5000 })
+                    )
+                })
+                break;
+            case 'GeneralGraardor':
+                member.then(async mem => {
+                    await mem.roles.remove(roles.specificRoles.bandos);
+                    message.channel.send(`${mem}, you have been removed from the **${roles.specificRoles.bandos.name}** role!`).then(m => m.delete({ timeout: 5000 })
+                    )
+                })
+                break;
+            case 'CommanderZilyana':
+                member.then(async mem => {
+                    await mem.roles.remove(roles.specificRoles.sara);
+                    message.channel.send(`${mem}, you have been removed from the **${roles.specificRoles.sara.name}** role!`).then(m => m.delete({ timeout: 5000 })
+                    )
+                })
+                break;
+            case 'KrilTsutsaroth':
+                member.then(async mem => {
+                    await mem.roles.remove(roles.specificRoles.zammy);
+                    message.channel.send(`${mem}, you have been removed from the **${roles.specificRoles.zammy.name}** role!`).then(m => m.delete({ timeout: 5000 })
+                    )
+                })
+                break;
+            case 'Callisto':
+                member.then(async mem => {
+                    await mem.roles.remove(roles.specificRoles.callisto);
+                    message.channel.send(`${mem}, you have been removed from the **${roles.specificRoles.callisto.name}** role!`).then(m => m.delete({ timeout: 5000 })
+                    )
+                })
+                break;
+            case 'KingBlackDragon':
+                member.then(async mem => {
+                    await mem.roles.remove(roles.specificRoles.kbd);
+                    message.channel.send(`${mem}, you have been removed from the **${roles.specificRoles.kbd.name}** role!`).then(m => m.delete({ timeout: 5000 })
+                    )
+                })
+                break;
+            case 'Venenatis':
+                member.then(async mem => {
+                    await mem.roles.remove(roles.specificRoles.venenatis);
+                    message.channel.send(`${mem}, you have been removed from the **${roles.specificRoles.venenatis.name}** role!`).then(m => m.delete({ timeout: 5000 })
+                    )
+                })
+                break;
+            case 'Vetion':
+                member.then(async mem => {
+                    await mem.roles.remove(roles.specificRoles.vetion);
+                    message.channel.send(`${mem}, you have been removed from the **${roles.specificRoles.vetion.name}** role!`).then(m => m.delete({ timeout: 5000 })
+                    )
+                })
+                break;
+            case 'Wintertodt':
+                member.then(async mem => {
+                    await mem.roles.remove(roles.specificRoles.wintertodt);
+                    message.channel.send(`${mem}, you have been removed from the **${roles.specificRoles.wintertodt.name}** role!`).then(m => m.delete({ timeout: 5000 })
+                    )
+                })
+                break;
+            case 'Zalcano':
+                member.then(async mem => {
+                    await mem.roles.remove(roles.specificRoles.zalcano);
+                    message.channel.send(`${mem}, you have been removed from the **${roles.specificRoles.zalcano.name}** role!`).then(m => m.delete({ timeout: 5000 })
+                    )
+                })
+                break;
+            case 'DagannothSupreme':
+                member.then(async mem => {
+                    await mem.roles.remove(roles.specificRoles.dks);
+                    message.channel.send(`${mem}, you have been removed from the **${roles.specificRoles.dks.name}** role!`).then(m => m.delete({ timeout: 5000 })
+                    )
+                })
+                break;
+            case 'Scorpia':
+                member.then(async mem => {
+                    await mem.roles.remove(roles.specificRoles.scorpia);
+                    message.channel.send(`${mem}, you have been removed from the **${roles.specificRoles.scorpia.name}** role!`).then(m => m.delete({ timeout: 5000 })
+                    )
+                })
+                break;
+            case 'ChaosFanatic':
+                member.then(async mem => {
+                    await mem.roles.remove(roles.specificRoles.chaosFan);
+                    message.channel.send(`${mem}, you have been removed from the **${roles.specificRoles.chaosFan.name}** role!`).then(m => m.delete({ timeout: 5000 })
+                    )
+                })
+                break;
+            case 'KalphiteQueen':
+                member.then(async mem => {
+                    await mem.roles.remove(roles.specificRoles.kq);
+                    message.channel.send(`${mem}, you have been removed from the **${roles.specificRoles.kq.name}** role!`).then(m => m.delete({ timeout: 5000 })
+                    )
+                })
+                break;
+            case 'GiantMole':
+                member.then(async mem => {
+                    await mem.roles.remove(roles.specificRoles.mole);
+                    message.channel.send(`${mem}, you have been removed from the **${roles.specificRoles.mole.name}** role!`).then(m => m.delete({ timeout: 5000 })
+                    )
+                })
+                break;
+            case 'CorporealBeast':
+                member.then(async mem => {
+                    await mem.roles.remove(roles.specificRoles.corp);
+                    message.channel.send(`${mem}, you have been removed from the **${roles.specificRoles.corp.name}** role!`).then(m => m.delete({ timeout: 5000 })
+                    )
+                })
+                break;
+        }
+    }
+};
 
 export {
     fetchOsrsRoles,
-    determineRoleToAdd
+    determineRoleToAdd,
+    determineRoleToRemove
 }

@@ -1,5 +1,5 @@
 const { MessageEmbed } = require('discord.js');
-const { fetchOsrsRoles, determineRoleToAdd } = require('../../util/functions/guildEventsFunctions');
+const { fetchOsrsRoles, determineRoleToRemove } = require('../../util/functions/guildEventsFunctions');
 
 module.exports = async (bot, reaction, user) => {
     if (!reaction) return;
@@ -10,7 +10,7 @@ module.exports = async (bot, reaction, user) => {
     else if (!message.guild.id === '688514030117453895') return;
     else {
         fetchOsrsRoles(message).then(roles => {
-            determineRoleToAdd(member, message, emoji, roles)
+            determineRoleToRemove(member, message, emoji, roles)
         })
     }
 }
