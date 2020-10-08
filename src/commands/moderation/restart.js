@@ -8,7 +8,7 @@ module.exports = {
         usage: ``,
         description: "Shuts the bot down",
         accessibleby: "owner",
-        category: "owner"
+        category: "moderation"
     },
     run: async (bot, message, args) => {
         console.log(`[LOGS] Client restart triggered.`);

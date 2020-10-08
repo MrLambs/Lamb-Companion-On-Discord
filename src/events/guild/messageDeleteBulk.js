@@ -10,7 +10,7 @@ module.exports = async (bot, messages) => {
         channel = m.channel
         count++
     })
-    let found = guild.channels.cahe.find(channel => channel.name == 'mod-logs💬')
+    let found = guild.channels.cache.find(channel => channel.name == 'mod-logs💬')
     if (found) {
         let embed = new MessageEmbed()
             .setColor(logs_color)
