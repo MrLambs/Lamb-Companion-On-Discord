@@ -28,18 +28,18 @@ module.exports = {
                     User.findOne({ user_id: message.author.id })
                     .then(user => {
                         if (user) {
-                            verifyBetAmount(amountToPay, message).then(async verified => {
-                                if (!verified) return message.channel.send(new MessageEmbed().setColor("RED").setDescription(`:x: Sorry, your bet was declined. You do not have that much in your account. ${getExampleCommand(bot, 'pay')}`))
-                                else {
-                                    User.findOne(({ user_id: memberTag.id }))
+                            let verified = verifyBetAmount(user, amountToPay);
+                            if (!verified) return message.channel.send(new MessageEmbed().setColor("RED").setDescription(`:x: Sorry, your bet was declined. You do not have that much in your account. ${getExampleCommand(bot, 'pay')}`))
+                            else {
+                                User.findOne(({ user_id: memberTag.id }))
                                     .then(member => {
                                         let payEmbed = new MessageEmbed()
-                                        .setColor(fire_brick_red)
-                                        .setAuthor(`${message.author.username} just paid ${memberTag.user.username}`, message.author.displayAvatarURL({ format: 'png', dynamic: true }))
-                                        .setDescription(`💵 \`${amountToPay}\` **Lambies** 💵`)
-                                        .addField(`New total for ${message.author.username}:`, `\`${(user.money - amountToPay)}\` **Lambies**`)
-                                        .setTimestamp()
-                                        .setFooter(`${bot.user.username}`, bot.user.displayAvatarURL({ format: 'png', dynamic: true }));
+                                            .setColor(fire_brick_red)
+                                            .setAuthor(`${message.author.username} just paid ${memberTag.user.username}`, message.author.displayAvatarURL({ format: 'png', dynamic: true }))
+                                            .setDescription(`💵 \`${amountToPay}\` **Lambies** 💵`)
+                                            .addField(`New total for ${message.author.username}:`, `\`${(user.money - amountToPay)}\` **Lambies**`)
+                                            .setTimestamp()
+                                            .setFooter(`${bot.user.username}`, bot.user.displayAvatarURL({ format: 'png', dynamic: true }));
                                         if (!member) {
                                             const newUser = new User({
                                                 _id: mongoose.Types.ObjectId(),
@@ -64,8 +64,7 @@ module.exports = {
                                             return message.channel.send(payEmbed)
                                         }
                                     })
-                                }
-                            })
+                            }
                         }
                     })
                 }

@@ -1,60 +1,37 @@
-const User = require('../models/user');
 const { getEmoji } = require('./chatFunctions');
 
-const addWinnings = (amount, message) => {
+const addWinnings = (user, amount) => {
     try {
-        User.findOne({ user_id: message.author.id })
-            .then(user => {
-                user.money += (amount * 2);
-                user.save()
-            })
+        user.money = user.money + amount;
+        user.save()
     } catch (err) {
         console.log(`[ERR] ${err.message}`)
     };
 };
 
-const deductBet = (amount, message) => {
+const deductBet = (user, amount) => {
     try {
-        User.findOne({ user_id: message.author.id })
-            .then(user => {
-                user.money -= amount;
-                user.save()
-            })
+        user.money = user.money - amount;
+        user.save()
     } catch (err) {
         console.log(`[ERR] ${err.message}`)
     };
 };
 
-const returnBet = (amount, message) => {
-    try {
-        User.findOne({ user_id: message.author.id })
-            .then(user => {
-                user.money += amount;
-                user.save()
-            })
-    } catch (err) {
-        console.log(`[ERR] ${err.message}`)
-    };
-};
-
-const verifyBetAmount = (amount, message) => {
+const verifyBetAmount = (user, amount) => {
     let verified = false;
-    return User
-        .findOne({ user_id: message.author.id })
-        .then(user => {
-            if (amount <= user.money) return verified = true;
-            else return verified
-        })
+    if (amount <= user.money) return verified = true;
+    else return verified
 };
 
 const getRouletteResult = (bot, playerChoice) => {
     let redCircle = getEmoji(bot, '727209313960984626'),
-    blackCircle = getEmoji(bot, '727209571038396537'),
-    colorsArr = [blackCircle, redCircle],
-    notEmojiColorsArr = ['black', 'red'],
-    count = Math.floor(Math.random() * 25),
-    lastColor = '',
-    newMessage = '';
+        blackCircle = getEmoji(bot, '727209571038396537'),
+        colorsArr = [blackCircle, redCircle],
+        notEmojiColorsArr = ['black', 'red'],
+        count = Math.floor(Math.random() * 25),
+        lastColor = '',
+        newMessage = '';
 
     for (let i = 0; i < count; i++) {
         if (i == 0) {
@@ -77,11 +54,28 @@ const getRouletteResult = (bot, playerChoice) => {
     return rouletteGameObj;
 };
 
+const getCoinFlipResult = playerChoice => {
+    let gameResult;
+    let choices = ['heads', 'tails'],
+        tossResult = choices[Math.floor(Math.random() * choices.length)]
+    if (tossResult === playerChoice) {
+        return gameResult = {
+            res: 'won',
+            tossResult
+        }
+    } else {
+        return gameResult = {
+            res: 'lost',
+            tossResult
+        }
+    }
+};
+
 
 export {
     addWinnings,
     deductBet,
-    returnBet,
     verifyBetAmount,
-    getRouletteResult
+    getRouletteResult,
+    getCoinFlipResult
 }

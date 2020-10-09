@@ -26,39 +26,38 @@ module.exports = {
                 let rouletteGame = getRouletteResult(bot, playerChoice);
                 await message.channel.send(`${rouletteGame.newMessage}`);
                 User.findOne({ user_id: message.author.id })
-                .then(user => {
-                    verifyBetAmount(playerBet, message).then(async verified => {
+                    .then(user => {
+                        let verified = verifyBetAmount(user, playerBet);
                         if (!verified) return message.channel.send(new MessageEmbed().setColor("RED").setDescription(`:x: Sorry, your bet was declined. You do not have that much in your account. ${getExampleCommand(bot, 'roulette')}`))
                         else {
                             switch (rouletteGame.result) {
                                 case 'won':
-                                    addWinnings(playerBet, message);
+                                    addWinnings(user, playerBet);
                                     return message.channel.send(new MessageEmbed()
-                                    .setColor(fire_brick_red)
-                                    .setAuthor(message.author.username, message.author.displayAvatarURL({ format: 'png', dynamic: true }))
-                                    .setDescription(stripIndents`
+                                        .setColor(fire_brick_red)
+                                        .setAuthor(message.author.username, message.author.displayAvatarURL({ format: 'png', dynamic: true }))
+                                        .setDescription(stripIndents`
                                     **Congrats, you won!**
                                     ---
                                     [\`${user.money}\` **Lambies** 💵]
                                     `)
-                                    .addField('Result:', titleCase(rouletteGame.lastColor)))
+                                        .addField('Result:', titleCase(rouletteGame.lastColor)))
                                     break;
                                 case 'lost':
-                                    await deductBet(playerBet, message);
+                                    deductBet(user, playerBet);
                                     return message.channel.send(new MessageEmbed()
-                                    .setColor(fire_brick_red)
-                                    .setAuthor(message.author.username, message.author.displayAvatarURL({ format: 'png', dynamic: true }))
-                                    .setDescription(stripIndents`
+                                        .setColor(fire_brick_red)
+                                        .setAuthor(message.author.username, message.author.displayAvatarURL({ format: 'png', dynamic: true }))
+                                        .setDescription(stripIndents`
                                     **Sorry, you lost!**
                                     ---
                                     [\`${user.money}\` **Lambies** 💵]
                                     `)
-                                    .addField('Result:', titleCase(rouletteGame.lastColor)))
+                                        .addField('Result:', titleCase(rouletteGame.lastColor)))
                                     break;
-                            }        
+                            }
                         }
                     })
-                })
             } catch (err) {
                 console.log(`[ERR] ${err.message}`);
                 return message.channel.send(new MessageEmbed().setColor("RED").setDescription(`Oops, something went wrong. Your bet was returned. Please try again.`))
