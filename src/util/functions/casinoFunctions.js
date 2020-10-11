@@ -71,11 +71,33 @@ const getCoinFlipResult = playerChoice => {
     }
 };
 
+const getBlackJackGame = () => {
+    let blackJackGame;
+    return blackJackGame = {
+        playerHand: {
+            card1: Math.floor(Math.random() * 11) + 2,
+            card2: Math.floor(Math.random() * 11) + 2
+        },
+        botHand: {
+            card1: Math.floor(Math.random() * 11) + 2,
+            card2: Math.floor(Math.random() * 11) + 2
+        }
+    }
+}
+
+const finishBlackJackGame = (msg, embed, hit, stand) => {
+    msg.edit(embed)
+    hit.stop()
+    stand.stop();
+}
+
 
 export {
     addWinnings,
     deductBet,
     verifyBetAmount,
     getRouletteResult,
-    getCoinFlipResult
+    getCoinFlipResult,
+    getBlackJackGame,
+    finishBlackJackGame
 }

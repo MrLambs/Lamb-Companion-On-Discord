@@ -12,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "axios": "^0.20.0",
+    "beautify": "0.0.8",
     "common-tags": "^1.8.0",
     "dateformat": "^3.0.3",
     "discord-giveaways": "^4.2.1",
