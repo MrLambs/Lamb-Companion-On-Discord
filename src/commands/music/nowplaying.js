@@ -12,7 +12,6 @@ module.exports = {
     },
     run: async (bot, message, args) => {
         const player = getGuildPlayer(bot, message);
-        message.react(`${player.playing ? "▶️" : "⏸️"}`);
         try {
         if (!player || !player.queue.current) return message.channel.send("No song(s) currently playing within this guild.");
         const { title, author, duration, thumbnail } = player.queue.current;

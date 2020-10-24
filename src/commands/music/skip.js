@@ -11,7 +11,6 @@ module.exports = {
         usage: "<input>"
     },
     run: (bot, message, args) => {
-        message.react('⏩')
         try {
         const player = getGuildPlayer(bot, message)
         if (!player) return message.channel.send(new MessageEmbed().setColor("RED").setDescription("No songs currently playing in this guild."));

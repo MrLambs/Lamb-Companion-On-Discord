@@ -9,7 +9,6 @@ module.exports = {
         category: "music",
     },
     run: async (bot, message, args) => {
-        message.react('👋')
         try {
             const voiceChannel = message.member.voice.channel;
             const player = bot.manager.players.get(message.guild.id);
