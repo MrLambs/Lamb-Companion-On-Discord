@@ -38,8 +38,7 @@ module.exports = async (bot) => {
 
     let statuses = [
         `${prefix}help`,
-        `over ${bot.guilds.cache.size} servers`,
-        `over ${bot.users.cache.size} users`
+        `over ${bot.guilds.cache.size} servers`
     ]
 
     setInterval(function () {
