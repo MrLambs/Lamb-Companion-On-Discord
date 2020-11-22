@@ -2,6 +2,7 @@ const { MessageEmbed, Collection } = require('discord.js');
 const { red } = require('../../util/jsons/colors.json')
 
 module.exports = async (bot, member) => {
+    console.log('nope')
     const newUsers = []
 
     let messageToSend = [`**${member.user.username}** has just left the server.`, `We will miss you, **${member.user.username}.**`, `You will be remember as the person you were, **${member.user.username}**.`, `**${member.user.username}**, see you on the other side.`, `Hasta la vista, **${member.user.username}**.`, `**${member.user.username}** has left the building.`, `**${member.user.username}** is gone, but never forgotten.`];

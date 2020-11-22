@@ -1,5 +1,7 @@
 const { MessageEmbed } = require('discord.js')
 const { stripIndents } = require('common-tags')
+const { my_discord_id } = require('../../util/jsons/config.json');
+
 
 module.exports = {
     config: {
@@ -12,7 +14,7 @@ module.exports = {
     },
     run: async (bot, message, args) => {
         console.log(`[LOGS] Client restart triggered.`);
-        if (!message.author.id == `328912599276060673` || !message.author.id == `379149411567009792`) return message.channel.send(new MessageEmbed().setColor("RED").setDescription(`:x: You do not have permission to do that`));
+        if (message.author.id !== my_discord_id) return message.channel.send(new MessageEmbed().setColor("RED").setDescription(`:x: You do not have permission to do that`));
         else {
             try {
 

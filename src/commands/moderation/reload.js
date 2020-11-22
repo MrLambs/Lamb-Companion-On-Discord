@@ -1,6 +1,7 @@
 const { MessageEmbed } = require('discord.js');
 const { readdirSync } = require('fs');
-const { join } = require('path')
+const { join } = require('path');
+const { my_discord_id } = require('../../util/jsons/config.json');
 
 module.exports = {
     config: {
@@ -11,7 +12,7 @@ module.exports = {
         category: "moderation"
     },
     run: async (bot, message, args) => {
-        if (!message.author.id == `328912599276060673` || !message.author.id == `379149411567009792`) return message.channel.send(new MessageEmbed().setColor("RED").setDescription(`:x: You do not have permission to do that`));
+        if (message.author.id !== my_discord_id) return message.channel.send(new MessageEmbed().setColor("RED").setDescription(`:x: You do not have permission to do that`));
         else {
             try {
                 if (!args[0]) return message.channel.send(new MessageEmbed().setColor("RED").setDescription(':x: Please provide a command name to reload!'));

@@ -2,7 +2,7 @@ const { MessageEmbed } = require('discord.js');
 const { stripIndents } = require('common-tags');
 const { fire_brick_red } = require('../../util/jsons/colors.json');
 const { getExampleCommand, titleCase } = require('../../util/functions/chatFunctions');
-const { getCoinFlipResult, addWinnings, deductBet } = require('../../util/functions/casinoFunctions');
+const { getCoinFlipResult, addWinnings, deductBet, verifyBetAmount } = require('../../util/functions/casinoFunctions');
 const User = require('../../util/models/user');
 
 module.exports = {
@@ -24,6 +24,8 @@ module.exports = {
             choice = choice.toLowerCase()
             User.findOne({ user_id: message.author.id })
                 .then(user => {
+                    let verified = verifyBetAmount(user, bet);
+                    if (!verified) return message.channel.send(new MessageEmbed().setColor("RED").setDescription(`:x: Sorry, your bet was declined. You do not have that much in your account. ${getExampleCommand(bot, 'roulette')}`))
                     let gameResult = getCoinFlipResult(choice);
                     switch (gameResult.res) {
                         case 'won':

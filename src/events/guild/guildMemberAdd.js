@@ -2,6 +2,7 @@ const { MessageEmbed, Collection } = require('discord.js');
 const { green } = require('../../util/jsons/colors.json')
 
 module.exports = async (bot, member) => {
+    console.log('yep')
     const newUsers = []
 
     let messageToSend = [`**${member.user.username}** just joined the server - glhf!`, `**${member.user.username}** just joined. Everyone, look busy!`, `**${member.user.username}** joined your party.`, `**${member.user.username}** joined. You must construct additional pylons`, `Ermagherd. **${member.user.username}** is here.`, `Welcome, **${member.user.username}**. Stay awhile and listen.`, `Welcome, **${member.user.username}**. We were expecting you ( ͡° ͜ʖ ͡°)`, `Welcome, **${member.user.username}**. We hope you brought pizza.`, `Welcome, **${member.user.username}**. Leave your weapons by the door.`, `A wild **${member.user.username}** appeared.`, `Swoooosh. **${member.user.username}** just landed.`, `Brace yourselves. **${member.user.username}** just joined the server.`, `**${member.user.username}** just joined. Hide your bananas.`, `**${member.user.username}** just arrived. Seems OP - please nerf.`, `**${member.user.username}** just slid into the server`, `**${member.user.username}** has spawned in the server.`, `**${member.user.username}** showed up!`, `Where's **${member.user.username}**? In the server!`, `**${member.user.username}** hopped into the server. Kangaroo!!`, `**${member.user.username}** just showed up. Hold my beer.`, `Challenger approaching - **${member.user.username}** has appeared!`];

@@ -1,6 +1,7 @@
 const { MessageEmbed } = require('discord.js');
 const { titleCase } = require('../../util/functions/chatFunctions');
 const beautify = require('beautify');
+const { my_discord_id } = require('../../util/jsons/config.json');
 
 module.exports = {
     config: {
@@ -13,7 +14,7 @@ module.exports = {
     },
     run: async (bot, message, args) => {
         try {
-            if (!message.author.id === '328912599276060673') return message.channel.send(new MessageEmbed().setColor("RED").setDescription(":x: Sorry, you do not have permission to use this command."))
+            if (message.author.id !== my_discord_id) return message.channel.send(new MessageEmbed().setColor("RED").setDescription(`:x: You do not have permission to do that`));
             else if (!args[0]) return message.channel.send(new MessageEmbed().setColor("RED").setDescription(':x: You need to enter **something** to evaluate.'))
             else if (args.join(' ').toLowerCase().includes('token')) return;
             else {
