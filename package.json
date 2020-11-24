@@ -13,6 +13,7 @@
   "dependencies": {
     "axios": "^0.20.0",
     "beautify": "0.0.8",
+    "canvacord": "^5.0.8",
     "common-tags": "^1.8.0",
     "dateformat": "^3.0.3",
     "discord-giveaways": "^4.2.1",
@@ -28,6 +29,7 @@
     "node-movie": "^3.0.0",
     "nodemon": "^2.0.4",
     "oldschooljs": "^1.4.1",
-    "osrs-alchemy": "^2.0.1"
+    "osrs-alchemy": "^2.0.1",
+    "parse-ms": "^2.1.0"
   }
 }

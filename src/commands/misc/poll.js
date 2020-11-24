@@ -13,19 +13,20 @@ module.exports = {
     },
     run: async (bot, message, args) => {
         try {
-        if (!args[0]) return message.channel.send(`Proper Usage: ${prefix}poll (question)`);
-        const embed = new MessageEmbed()
-            .setColor(0xffffff)
-            .setFooter('React to vote.')
-            .setDescription(capitalize(args))
-            .setColor(orange)
-            .setTitle(`Poll created by ${message.author.username}`);
-        let msg = await message.channel.send({ embed });
+            if (!args[0]) return message.channel.send(`Proper Usage: ${prefix}poll (question)`);
+            console.log(args)
+            const embed = new MessageEmbed()
+                .setColor(0xffffff)
+                .setFooter('React to vote.')
+                .setDescription(capitalize(args.join(' ')))
+                .setColor(orange)
+                .setTitle(`Poll created by ${message.author.username}`);
+            let msg = await message.channel.send({ embed });
 
-        await msg.react('✅');
-        await msg.react('❌');
+            await msg.react('✅');
+            await msg.react('❌');
 
-        message.delete({ timeout: 1000 });
+            message.delete({ timeout: 1000 });
         } catch (e) {
             console.log(`[ERR] ${e.message}`)
         }

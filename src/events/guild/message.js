@@ -31,7 +31,9 @@ module.exports = async (bot, message) => {
                         username: message.author.username,
                         money: lambiesToAdd,
                         xp: xpToAdd,
-                        level: 1
+                        level: 1,
+                        daily: null,
+                        worked: null
                     })
                     newUser.save().catch(err => console.log(`[ERR] ${err.message}`))
                     console.log(`[LOGS] User added to database`)

@@ -16,6 +16,14 @@ const userSchema = new Schema ({
     level: {
         type: Number,
         default: 1
+    },
+    daily: {
+        type: Number,
+        default: null
+    },
+    worked: {
+        type: Number,
+        default: null
     }
 });
 
