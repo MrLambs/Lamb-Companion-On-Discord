@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const userSchema = new Schema ({
+const userSchema = new Schema({
     _id: Schema.Types.ObjectId,
     username: String,
     user_id: String,
@@ -24,6 +24,12 @@ const userSchema = new Schema ({
     worked: {
         type: Number,
         default: null
+    },
+    items: {
+        type: Object,
+        default: {
+            ttsCounter: 0
+        }
     }
 });
 

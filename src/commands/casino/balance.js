@@ -1,6 +1,7 @@
 const { MessageEmbed } = require('discord.js');
 const { stripIndents } = require('common-tags');
 const { fire_brick_red } = require('../../util/jsons/colors.json');
+const { addCommas } = require('../../util/functions/chatFunctions')
 const User = require('../../util/models/user');
 
 module.exports = {
@@ -21,7 +22,7 @@ module.exports = {
                         .setColor(fire_brick_red)
                         .setAuthor(message.author.username, message.author.displayAvatarURL({ format: 'png', dynamic: true }))
                         .setDescription(stripIndents`
-            Your account 💳 currently has \`${user.money}\` **Lambies** 💵
+            Your account 💳 currently has \`${addCommas(user.money)}\` **Lambies** 💵
             `)
                         .setFooter(`${bot.user.username}`, bot.user.displayAvatarURL({ format: 'png', dynamic: true }))
                         .setTimestamp()

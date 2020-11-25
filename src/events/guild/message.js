@@ -33,7 +33,10 @@ module.exports = async (bot, message) => {
                         xp: xpToAdd,
                         level: 1,
                         daily: null,
-                        worked: null
+                        worked: null,
+                        items: {
+                            ttsCounter: 0
+                        }
                     })
                     newUser.save().catch(err => console.log(`[ERR] ${err.message}`))
                     console.log(`[LOGS] User added to database`)
@@ -41,18 +44,18 @@ module.exports = async (bot, message) => {
                     user.money += lambiesToAdd;
                     user.xp += xpToAdd
                     const xpNeeded = getNeededXP(user.level)
-                    if (user.xp >= xpNeeded){
+                    if (user.xp >= xpNeeded) {
                         user.level++,
-                        user.xp -= xpNeeded;
+                            user.xp -= xpNeeded;
 
                         message.channel.send(new MessageEmbed().setColor("GREEN").setDescription(stripIndents`
                         🎊🎉 ${message.author}, you are now **level ${user.level}** with **${user.xp}xp**!! 🎉🎊 
                         
                         [ **Next level: ${getNeededXP(user.level)}xp** ] 
                         `))
-                        .then(m => {
-                            m.delete({ timeout: 15000 })
-                        })
+                            .then(m => {
+                                m.delete({ timeout: 15000 })
+                            })
                     };
                     user.save().catch(err => console.log(`[ERR] ${err.message}`));
                 }

@@ -64,7 +64,7 @@ module.exports = {
                         });
 
                         collector.on("end", (_, reason) => {
-                            if (["time", "cancelled"].includes(reason)) return message.channel.send("Cancelled selection.")
+                            if (["time", "cancelled"].includes(reason)) return message.channel.send(new MessageEmbed().setColor('RED').setDescription(":x: Cancelled selection."))
                         });
                         break;
                 }

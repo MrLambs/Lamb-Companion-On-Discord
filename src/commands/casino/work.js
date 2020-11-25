@@ -13,7 +13,8 @@ module.exports = {
     },
     run: async (bot, message, args) => {
         let timeout = 600000;
-        let amount = (Math.floor(Math.random() * 80) * 1) + 1
+        let lambiesAmount = (Math.floor(Math.random() * 80) * 1) + 1
+        let xpAmount = (Math.floor(Math.random() * 80) * 1) + 1
 
         User.findOne({ user_id: message.author.id })
             .then(user => {
@@ -23,10 +24,11 @@ module.exports = {
                     return message.channel.send(new MessageEmbed().setColor("RED").setDescription(`:x: You cannot work again for: **${time.minutes}m** and **${time.seconds}s**`))
                 } else {
                     user.worked = Date.now();
-                    user.money += amount;
+                    user.money += lambiesAmount;
+                    user.xp += xpAmount
                     user.save()
 
-                    return message.channel.send(new MessageEmbed().setColor("GREEN").setAuthor(`${message.author.username} just worked their a** off!`, message.author.displayAvatarURL({ format: 'png', dynamic: true })).setDescription(`💪 you **__worked__** and earned \`\`${amount}\`\` **Lambies**`).setFooter('Cannot work again for 10 minutes'))
+                    return message.channel.send(new MessageEmbed().setColor("GREEN").setAuthor(`${message.author.username} just worked their a** off!`, message.author.displayAvatarURL({ format: 'png', dynamic: true })).setDescription(`💪 you **__worked__** and earned \`\`${lambiesAmount}\`\` **Lambies** and \`\`${xpAmount}\`\` **XP**`).setFooter('Cannot work again for 10 minutes'))
                 }
             })
     }

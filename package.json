@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@discordjs/opus": "^0.3.3",
     "axios": "^0.20.0",
     "beautify": "0.0.8",
     "canvacord": "^5.0.8",
@@ -20,8 +21,10 @@
     "discord.js": "^12.3.1",
     "erela.js": "^2.0.1",
     "esm": "^3.2.25",
+    "ffmpeg-static": "^4.2.7",
     "fs": "0.0.1-security",
     "giphy-api": "^2.0.1",
+    "gtts": "^0.2.1",
     "mathjs": "^7.2.0",
     "mongoose": "^5.10.6",
     "ms": "^2.1.2",
@@ -30,6 +33,7 @@
     "nodemon": "^2.0.4",
     "oldschooljs": "^1.4.1",
     "osrs-alchemy": "^2.0.1",
-    "parse-ms": "^2.1.0"
+    "parse-ms": "^2.1.0",
+    "say": "^0.16.0"
   }
 }

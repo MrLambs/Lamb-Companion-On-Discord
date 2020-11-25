@@ -1,4 +1,6 @@
 const { getEmoji } = require('./chatFunctions');
+const gTTS = require('gtts');
+const fs = require('fs');
 
 const addWinnings = (user, amount) => {
     try {
@@ -91,6 +93,69 @@ const finishBlackJackGame = (msg, embed, hit, stand) => {
     stand.stop();
 }
 
+const tts = (voiceChannel, text, user) => {
+    if (!fs.existsSync('./src/util/tts')) fs.mkdirSync('./src/util/tts');
+    const timestamp = new Date().getTime();
+    const soundPath = `./src/util/tts/${timestamp}.mp3`
+
+    let gtts = new gTTS(text, 'en-us');
+    gtts.save(soundPath, (err, res) => {
+        if (err) return console.log(`[ERR] ${err.message}`)
+        else {
+            voiceChannel.join()
+                .then(connection => {
+                    connection
+                        .play(soundPath)
+                        .on('finish', () => {
+                            connection.disconnect()
+                            fs.unlinkSync(soundPath);
+                            let current = user.items.ttsCounter;
+                            user.items = {
+                                ...user.items,
+                                ttsCounter: current + 1
+                            }
+                            user.money = user.money - 500;
+                            user.save()
+                        })
+                        .on('error', (err) => {
+                            console.error(err)
+                            connection.disconnect()
+                            fs.unlinkSync(soundPath)
+                        });
+                }).catch(err => {
+                    console.error(err)
+                })
+        }
+    })
+    // say.export(text, null, 1, soundPath, err => {
+    // if (err) return console.log(`[ERR] ${err.message}`)
+    // else {
+    //     voiceChannel.join()
+    //         .then(connection => {
+    //             connection
+    //                 .play(soundPath)
+    //                 .on('finish', () => {
+    //                     connection.disconnect()
+    //                     fs.unlinkSync(soundPath);
+    //                     let current = user.items.ttsCounter;
+    //                     user.items = {
+    //                         ...user.items,
+    //                         ttsCounter: current + 1
+    //                     }
+    //                     user.money = user.money - 500;
+    //                     user.save()
+    //                 })
+    //                 .on('error', (err) => {
+    //                     console.error(err)
+    //                     connection.disconnect()
+    //                     fs.unlinkSync(soundPath)
+    //                 });
+    //         }).catch(err => {
+    //             console.error(err)
+    //         })
+    // }
+    // })
+}
 
 export {
     addWinnings,
@@ -99,5 +164,6 @@ export {
     getRouletteResult,
     getCoinFlipResult,
     getBlackJackGame,
-    finishBlackJackGame
+    finishBlackJackGame,
+    tts
 }
