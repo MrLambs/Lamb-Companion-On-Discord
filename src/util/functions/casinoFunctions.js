@@ -1,5 +1,6 @@
 const { getEmoji } = require('./chatFunctions');
 const gTTS = require('gtts');
+const googleTTS = require('node-google-tts-api')
 const fs = require('fs');
 
 const addWinnings = (user, amount) => {
@@ -96,38 +97,20 @@ const finishBlackJackGame = (msg, embed, hit, stand) => {
 const tts = (voiceChannel, text, user) => {
     if (!fs.existsSync('./src/util/tts')) fs.mkdirSync('./src/util/tts');
     const timestamp = new Date().getTime();
-    const soundPath = `./src/util/tts/${timestamp}.mp3`
+    const soundPath = `./src/util/tts/${timestamp}.mp3` //${timestamp}.mp3
 
-    let gtts = new gTTS(text, 'en-us');
-    gtts.save(soundPath, (err, res) => {
-        if (err) return console.log(`[ERR] ${err.message}`)
-        else {
-            voiceChannel.join()
-                .then(connection => {
-                    connection
-                        .play(soundPath)
-                        .on('finish', () => {
-                            connection.disconnect()
-                            fs.unlinkSync(soundPath);
-                            let current = user.items.ttsCounter;
-                            user.items = {
-                                ...user.items,
-                                ttsCounter: current + 1
-                            }
-                            user.money = user.money - 500;
-                            user.save()
-                        })
-                        .on('error', (err) => {
-                            console.error(err)
-                            connection.disconnect()
-                            fs.unlinkSync(soundPath)
-                        });
-                }).catch(err => {
-                    console.error(err)
-                })
-        }
+    const tts = new googleTTS();
+
+    tts.get({
+        text: text,
+        lang: 'en',
+        gender: 'male'
+    }).then(data => {
+        fs.writeFileSync(soundPath, data)
     })
-    // say.export(text, null, 1, soundPath, err => {
+
+    // let gtts = new gTTS(text, 'en-ca');
+    // gtts.save(soundPath, (err, res) => {
     // if (err) return console.log(`[ERR] ${err.message}`)
     // else {
     //     voiceChannel.join()
@@ -138,11 +121,11 @@ const tts = (voiceChannel, text, user) => {
     //                     connection.disconnect()
     //                     fs.unlinkSync(soundPath);
     //                     let current = user.items.ttsCounter;
-    //                     user.items = {
-    //                         ...user.items,
-    //                         ttsCounter: current + 1
-    //                     }
-    //                     user.money = user.money - 500;
+    //                     // user.items = {
+    //                     //     ...user.items,
+    //                     //     ttsCounter: current + 1
+    //                     // }
+    //                     // user.money = user.money - 500;
     //                     user.save()
     //                 })
     //                 .on('error', (err) => {

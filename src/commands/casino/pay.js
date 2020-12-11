@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const User = require('../../util/models/user');
 const { MessageEmbed } = require('discord.js');
 const { verifyBetAmount } = require('../../util/functions/casinoFunctions');
-const { getExampleCommand } = require('../../util/functions/chatFunctions');
+const { getExampleCommand, addCommas } = require('../../util/functions/chatFunctions');
 const { fire_brick_red } = require('../../util/jsons/colors.json');
 
 module.exports = {
@@ -37,7 +37,7 @@ module.exports = {
                                             .setColor(fire_brick_red)
                                             .setAuthor(`${message.author.username} just paid ${memberTag.user.username}`, message.author.displayAvatarURL({ format: 'png', dynamic: true }))
                                             .setDescription(`💵 \`${amountToPay}\` **Lambies** 💵`)
-                                            .addField(`New total for ${message.author.username}:`, `\`${(user.money - amountToPay)}\` **Lambies**`)
+                                            .addField(`New total for ${message.author.username}:`, `\`${addCommas((user.money - amountToPay))}\` **Lambies**`)
                                             .setTimestamp()
                                             .setFooter(`${bot.user.username}`, bot.user.displayAvatarURL({ format: 'png', dynamic: true }));
                                         if (!member) {
@@ -52,7 +52,7 @@ module.exports = {
                                             user.money -= amountToPay;
                                             newUser.save();
                                             user.save();
-                                            payEmbed.addField(`New total for ${memberTag.user.username}:`, `\`${newUser.money}\` **Lambies** `)
+                                            payEmbed.addField(`New total for ${memberTag.user.username}:`, `\`${addCommas(newUser.money)}\` **Lambies** `)
                                             return message.channel.send(payEmbed)
                                         }
                                         else {
@@ -60,7 +60,7 @@ module.exports = {
                                             user.money -= amountToPay;
                                             member.save();
                                             user.save();
-                                            payEmbed.addField(`New total for ${memberTag.user.username}:`, `\`${member.money}\` **Lambies**`)
+                                            payEmbed.addField(`New total for ${memberTag.user.username}:`, `\`${addCommas(member.money)}\` **Lambies**`)
                                             return message.channel.send(payEmbed)
                                         }
                                     })

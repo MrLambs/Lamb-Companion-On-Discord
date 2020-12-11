@@ -1,7 +1,7 @@
 const { MessageEmbed } = require('discord.js');
 const { stripIndents } = require('common-tags');
 const { fire_brick_red } = require('../../util/jsons/colors.json');
-const { getExampleCommand, titleCase } = require('../../util/functions/chatFunctions');
+const { getExampleCommand, titleCase, addCommas } = require('../../util/functions/chatFunctions');
 const { getCoinFlipResult, addWinnings, deductBet, verifyBetAmount } = require('../../util/functions/casinoFunctions');
 const User = require('../../util/models/user');
 
@@ -34,7 +34,7 @@ module.exports = {
                                 new MessageEmbed()
                                     .setThumbnail('https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSJki_4Z0UyjP9USnc7oP83JnP9mIzJWFgA2dD6jYNZa4qyDD8_&usqp=CAU')
                                     .setColor(fire_brick_red)
-                                    .setDescription(`**Result: ${titleCase(gameResult.tossResult)}**\n---\nCongrats!\nYou won! New total: ${user.money} Lambies`)
+                                    .setDescription(`**Result: ${titleCase(gameResult.tossResult)}**\n---\nCongrats!\nYou won! New total: ${addCommas(user.money)} Lambies`)
                             )
                             break;
                         case 'lost':
@@ -43,7 +43,7 @@ module.exports = {
                                 new MessageEmbed()
                                     .setThumbnail('https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSJki_4Z0UyjP9USnc7oP83JnP9mIzJWFgA2dD6jYNZa4qyDD8_&usqp=CAU')
                                     .setColor(fire_brick_red)
-                                    .setDescription(`**Result: ${titleCase(gameResult.tossResult)}**\n---\nSorry!\nYou lost. New Total: ${user.money} Lambies`)
+                                    .setDescription(`**Result: ${titleCase(gameResult.tossResult)}**\n---\nSorry!\nYou lost. New Total: ${addCommas(user.money)} Lambies`)
                             )
                             break;
                     }

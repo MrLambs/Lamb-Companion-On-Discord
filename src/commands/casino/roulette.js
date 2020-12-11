@@ -1,7 +1,7 @@
 const { MessageEmbed } = require('discord.js');
 const { stripIndents } = require('common-tags');
 const { fire_brick_red } = require('../../util/jsons/colors.json');
-const { getExampleCommand, titleCase } = require('../../util/functions/chatFunctions');
+const { getExampleCommand, titleCase, addCommas } = require('../../util/functions/chatFunctions');
 const User = require('../../util/models/user');
 const { verifyBetAmount, deductBet, addWinnings, returnBet, getRouletteResult } = require('../../util/functions/casinoFunctions');
 
@@ -39,7 +39,7 @@ module.exports = {
                                         .setDescription(stripIndents`
                                     **Congrats, you won!**
                                     ---
-                                    [\`${user.money}\` **Lambies** 💵]
+                                    [\`${addCommas(user.money)}\` **Lambies** 💵]
                                     `)
                                         .addField('Result:', titleCase(rouletteGame.lastColor)))
                                     break;
@@ -51,7 +51,7 @@ module.exports = {
                                         .setDescription(stripIndents`
                                     **Sorry, you lost!**
                                     ---
-                                    [\`${user.money}\` **Lambies** 💵]
+                                    [\`${addCommas(user.money)}\` **Lambies** 💵]
                                     `)
                                         .addField('Result:', titleCase(rouletteGame.lastColor)))
                                     break;
