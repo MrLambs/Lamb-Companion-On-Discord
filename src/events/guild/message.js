@@ -2,7 +2,7 @@ const { prefix } = require('../../util/jsons/config.json');
 const { MessageEmbed } = require('discord.js');
 const mongoose = require('mongoose');
 const User = require('../../util/models/user');
-const { getNeededXP } = require('../../util/functions/chatFunctions');
+const { getNeededXP, getEmoji } = require('../../util/functions/chatFunctions');
 const { stripIndents } = require('common-tags')
 
 module.exports = async (bot, message) => {
@@ -33,7 +33,11 @@ module.exports = async (bot, message) => {
                         xp: xpToAdd,
                         level: 1,
                         daily: null,
-                        worked: null,
+                        worked: {
+                            dailyResetTimeout: null,
+                            tenMinuteResetTimeout: null,
+                            workedCounter: 0
+                        },
                         items: {
                             ttsCounter: 0
                         }
@@ -49,9 +53,9 @@ module.exports = async (bot, message) => {
                             user.xp -= xpNeeded;
 
                         message.channel.send(new MessageEmbed().setColor("GREEN").setDescription(stripIndents`
-                        🎊🎉 ${message.author}, you are now **level ${user.level}** with **${user.xp}xp**!! 🎉🎊 
+                        🎊🎉 ${message.author}, you are now **level ${user.level}** with **${user.xp}**${getEmoji(bot, '711014609519247371')}!! 🎉🎊 
                         
-                        [ **Next level: ${getNeededXP(user.level)}xp** ] 
+                        [ **Next level: ${getNeededXP(user.level)}**${getEmoji(bot, '711014609519247371')} ] 
                         `))
                             .then(m => {
                                 m.delete({ timeout: 15000 })

@@ -22,8 +22,12 @@ const userSchema = new Schema({
         default: null
     },
     worked: {
-        type: Number,
-        default: null
+        type: Object,
+        default: {
+            dailyResetTimeout: null,
+            tenMinuteResetTimeout: null,
+            workedCounter: 0
+        }
     },
     items: {
         type: Object,
