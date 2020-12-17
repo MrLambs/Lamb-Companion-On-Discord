@@ -33,8 +33,12 @@ module.exports = {
                 if (!worked.workedCounter) localWorkedCounter = 0
                 else localWorkedCounter = worked.workedCounter
 
-                if ((worked.tenMinuteResetTimeout !== null || worked.tenMinuteResetTimeout !== undefined)
-                    && (worked.dailyResetTimeout !== null || worked.dailyResetTimeout !== undefined)
+                console.log(dailyReset - (Date.now() - worked.dailyResetTimeout))
+                let dailyTimeLeft = ms(worked.dailyResetTimeout - (Date.now() - worked.dailyResetTimeout))
+                console.log(`${dailyTimeLeft.hours}h${dailyTimeLeft.minutes}m${dailyTimeLeft.seconds}s`)
+
+                if ((worked.dailyResetTimeout !== null || worked.dailyResetTimeout !== undefined)
+                    && (worked.tenMinuteResetTimeout !== null || worked.tenMinuteResetTimeout !== undefined)
                     && dailyReset - (Date.now() - worked.dailyResetTimeout) > 0) {
                     user.worked = {
                         ...user.worked,
@@ -71,10 +75,9 @@ module.exports = {
                     user.xp += xpAmount
                     user.save()
 
-                    let dailyTimeLeft = ms(dailyReset - (Date.now() - worked.dailyResetTimeout)),
-                        workEmbed = new MessageEmbed()
-                            .setColor("GREEN")
-                            .setDescription(`💪 you **__worked__** and earned \`\`${lambiesAmount}\`\` **Lambies** and \`\`${xpAmount}\`\` **XP**`)
+                    workEmbed = new MessageEmbed()
+                        .setColor("GREEN")
+                        .setDescription(`💪 you **__worked__** and earned \`\`${lambiesAmount}\`\` **Lambies** and \`\`${xpAmount}\`\` **XP**`)
 
                     if (!dailyTimeLeft || dailyTimeLeft.hours < 0 || dailyTimeLeft.minutes < 0 || dailyTimeLeft.seconds < 0) workEmbed.setFooter(`Cannot work again for 10 minutes`)
                     else workEmbed.setFooter(`Cannot work again for 10 minutes - Bonus will reset in ${dailyTimeLeft.hours}h ${dailyTimeLeft.minutes}m ${dailyTimeLeft.seconds}s`)
