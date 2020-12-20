@@ -3,7 +3,7 @@ const { stripIndents } = require('common-tags');
 const { fire_brick_red } = require('../../util/jsons/colors.json');
 const { getExampleCommand, titleCase, addCommas } = require('../../util/functions/chatFunctions');
 const User = require('../../util/models/user');
-const { verifyBetAmount, deductBet, addWinnings, returnBet, getRouletteResult } = require('../../util/functions/casinoFunctions');
+const { verifyBetAmount, deductBet, addWinnings, getRouletteResult } = require('../../util/functions/casinoFunctions');
 
 module.exports = {
     config: {

@@ -10,10 +10,13 @@ module.exports = async (bot) => {
         .on('nodeConnect', () => console.log('[LOGS] Successfully created a new music node'))
         .on('nodeError', (node, err) => console.log(`[ERR] Node error: ${err.message}`))
         .on('trackStart', (player, track) => {
+            player.setVolume(25)
             let npEmbed = new MessageEmbed()
                 .setColor("GREEN")
                 .setDescription(`▶️ Now playing: **${track.title}** \`${msToTime(track.duration)}\``)
-            bot.channels.cache
+                .setFooter(`Volume set to 25. To adjust volume please use: !volume 1-100`)
+                
+                bot.channels.cache
                 .get(player.textChannel)
                 .send(npEmbed)
                 .then(m => m.delete({ timeout: 15000 }))

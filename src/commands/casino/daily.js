@@ -26,7 +26,7 @@ module.exports = {
                     user.money += amount;
                     user.save()
 
-                    return message.channel.send(new MessageEmbed().setColor("GREEN").setAuthor(`Congrats ${message.author.username}`, message.author.displayAvatarURL({ format: 'png', dynamic: true })).setDescription(`:white_check_mark: You've completed your daily and earned: \`\`${amount}\`\` **Lambies**`))
+                    return message.channel.send(new MessageEmbed().setColor("GREEN").setAuthor(`Congrats ${message.author.username}`, message.author.displayAvatarURL({ format: 'png', dynamic: true })).setDescription(`:white_check_mark: You've completed your daily and earned: **${amount} Lambies**`))
                 }
             })
     }

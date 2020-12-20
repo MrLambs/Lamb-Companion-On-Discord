@@ -7,7 +7,7 @@ const User = require('../../util/models/user');
 module.exports = {
     config: {
         name: "balance",
-        aliases: ['lambies', 'checkbalance', 'atm'],
+        aliases: ['lambies', 'checkbalance', 'atm', 'bal'],
         usage: ``,
         description: "Check your current account balance.",
         accessableby: "Members",
@@ -22,7 +22,7 @@ module.exports = {
                         .setColor(fire_brick_red)
                         .setAuthor(message.author.username, message.author.displayAvatarURL({ format: 'png', dynamic: true }))
                         .setDescription(stripIndents`
-            Your account 💳 currently has \`${addCommas(user.money)}\` **Lambies** 💵
+            Your account 💳 currently has **${addCommas(user.money)} Lambies** 💵
             `)
                         .setFooter(`${bot.user.username}`, bot.user.displayAvatarURL({ format: 'png', dynamic: true }))
                         .setTimestamp()

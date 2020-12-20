@@ -24,6 +24,7 @@ module.exports = {
                     case 'watch':
                         break;
                     case 'tts message':
+                    case 'tts':
                         const voiceChannel = message.member.voice.channel;
                         if (!voiceChannel) return message.channel.send(new MessageEmbed().setColor("RED").setDescription(":x: You cannot buy this item until you are in a voice channel."));
                         const permissions = voiceChannel.permissionsFor(bot.user);
