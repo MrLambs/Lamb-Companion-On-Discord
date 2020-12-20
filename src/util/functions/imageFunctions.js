@@ -27,16 +27,10 @@ const getGiphy = async (search) => {
     return response;
 };
 
-const getMeme = async () => {
-    const response = fetch('https://meme-api.herokuapp.com/gimme').then(res => res.json())
-    return response;
-}
-
 export {
     getCatImage,
     getDogImage,
     getFoxImage,
     getShibeImage,
     getGiphy,
-    getMeme
 }

@@ -7,7 +7,7 @@ module.exports = {
         description: "F's in the chat",
         usage: "(optional: tag a member)",
         accessibleby: "Member",
-        category: 'misc'
+        category: 'images'
     },
     run: async (bot, message, args) => {
         try {

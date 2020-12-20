@@ -24,6 +24,7 @@
     "ffmpeg-static": "^4.2.7",
     "fs": "0.0.1-security",
     "giphy-api": "^2.0.1",
+    "google-play-scraper": "^8.0.2",
     "gtts": "^0.2.1",
     "mathjs": "^7.6.0",
     "mongoose": "^5.11.8",
@@ -33,6 +34,7 @@
     "nodemon": "^2.0.6",
     "oldschooljs": "^1.4.1",
     "osrs-alchemy": "^2.0.1",
-    "parse-ms": "^2.1.0"
+    "parse-ms": "^2.1.0",
+    "srod-v2": "^1.0.1"
   }
 }

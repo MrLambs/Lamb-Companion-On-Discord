@@ -7,7 +7,7 @@ module.exports = {
         description: "spank someone ( ͡° ͜ʖ ͡°)",
         usage: "(tag a member)",
         accessibleby: "Member",
-        category: 'misc'
+        category: 'images'
     },
     run: async (bot, message, args) => {
         try {

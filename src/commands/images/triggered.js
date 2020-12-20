@@ -7,7 +7,7 @@ module.exports = {
         description: "Trigger yourself or someone else in your guild",
         usage: "(optional: tag a member)",
         accessibleby: "Member",
-        category: 'misc'
+        category: 'images'
     },
     run: async (bot, message, args) => {
         try {
