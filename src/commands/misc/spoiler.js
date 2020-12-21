@@ -22,7 +22,7 @@ module.exports = {
             return message.channel.send(
                 new MessageEmbed()
                     .setColor(orange)
-                    .setAuthor(`${message.author.username} has deemd this message as a SPOILER!!`, message.author.displayAvatarURL())
+                    .setAuthor(`${message.author.username} has deemed this message as a SPOILER!!`, message.author.displayAvatarURL())
                     .setDescription(`||${spoiler}||`)
                     .setFooter(bot.user.username, bot.user.displayAvatarURL({ format: 'png', dynamic: true }))
                     .setTimestamp()
@@ -32,4 +32,4 @@ module.exports = {
             console.log(`[ERR] ${e.message}`)
         }
     }
-};
+}; 
