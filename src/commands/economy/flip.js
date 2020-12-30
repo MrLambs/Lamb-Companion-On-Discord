@@ -12,7 +12,7 @@ module.exports = {
         usage: `[bet] [heads/tails]`,
         description: "Check your current account balance.",
         accessableby: "Members",
-        category: "casino"
+        category: "economy"
     },
     run: async (bot, message, args) => {
         let bet = args[0],

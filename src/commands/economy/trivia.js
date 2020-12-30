@@ -9,7 +9,7 @@ module.exports = {
         usage: ``,
         description: "Spawn some trivia, receive xp for getting the correct answer",
         accessibleby: "Members",
-        category: "casino"
+        category: "economy"
     },
     run: async (bot, message, args) => {
         try {

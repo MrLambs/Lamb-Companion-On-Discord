@@ -11,7 +11,7 @@ module.exports = {
         usage: ``,
         description: "Check what's currently in your invenory",
         accessableby: "Members",
-        category: "casino"
+        category: "economy"
     },
     run: async (bot, message, args) => {
         User.findOne({ user_id: message.author.id })

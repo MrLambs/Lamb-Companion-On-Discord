@@ -12,7 +12,7 @@ module.exports = {
         usage: `[bet] [red/black] `,
         description: "Play roulette!",
         accessableby: "Members",
-        category: "casino"
+        category: "economy"
     },
     run: async (bot, message, args) => {
         let playerBet = args[0];
@@ -34,7 +34,7 @@ module.exports = {
                                 case 'won':
                                     addWinnings(user, playerBet);
                                     return message.channel.send(new MessageEmbed()
-                                        .setColor(fire_brick_red)
+                                        .setColor("GREEN")
                                         .setAuthor(message.author.username, message.author.displayAvatarURL({ format: 'png', dynamic: true }))
                                         .setDescription(stripIndents`
                                     **Congrats, you won!**

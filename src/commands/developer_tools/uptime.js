@@ -7,7 +7,7 @@ module.exports = {
         usage: ``,
         accessableby: "Members",
         aliases: ["ut"],
-        category: "moderation"
+        category: "developer_tools"
     },
     run: async (bot, message, args) => {
         try {

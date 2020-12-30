@@ -10,7 +10,7 @@ module.exports = {
         usage: ``,
         description: "Work your a** off!",
         accessableby: "Members",
-        category: "casino"
+        category: "economy"
     },
     run: async (bot, message, args) => {
         let dailyReset = 86400000,

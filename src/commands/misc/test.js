@@ -1,6 +1,6 @@
 const { orange } = require('../../util/jsons/colors.json');
 const { getExampleCommand, titleCase } = require('../../util/functions/chatFunctions')
-const Quiz  = require('../../util/games/quiz')
+const { tarkovScrape } = require('../../util/functions/tarkovFunctions')
 
 module.exports = {
     config: {
@@ -13,12 +13,7 @@ module.exports = {
     },
     run: async (bot, message, args) => {
         try {
-            new Quiz(message)
-                .setTitle('My quiz')
-                .setColor(orange)
-                .setTime(20000) // Set time
-                .on('start', game => console.log(game.item.answers)) // Start event also exists
-                .run()
+            tarkovScrape()
         } catch (e) {
             console.log(`[ERR] ${e.message}`)
         }

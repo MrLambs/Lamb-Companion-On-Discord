@@ -7,7 +7,7 @@ module.exports = {
         usage: `[2-100]`,
         accessibleby: "Members",
         aliases: ["latency"],
-        category: "moderation"
+        category: "developer_tools"
     },
     run: async (bot, message, args) => {
         try {

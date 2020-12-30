@@ -12,7 +12,7 @@ module.exports = {
                 usage: `[bet]`,
                 description: "Play a game of BlackJack against the bot",
                 accessableby: "Members",
-                category: "casino"
+                category: "economy"
         },
         run: async (bot, message, args) => {
                 let playerBet = args[0];

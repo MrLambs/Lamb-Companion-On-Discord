@@ -9,7 +9,7 @@ module.exports = {
         usage: ``,
         description: "Play Connect Four with another person",
         accessibleby: "Members",
-        category: "casino"
+        category: "economy"
     },
     run: async (bot, message, args) => {
         try {

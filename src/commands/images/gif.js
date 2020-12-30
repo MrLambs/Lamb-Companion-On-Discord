@@ -7,7 +7,7 @@ module.exports = {
     config: {
         name: "gif",
         description: "Searches for a giphy!",
-        usage: "(search term)",
+        usage: "[search term]",
         category: "images",
         accessibleby: "members"
     },
@@ -18,10 +18,11 @@ module.exports = {
             else {
                 let msg = await message.channel.send(new MessageEmbed().setColor("GREEN").setDescription(":mag: Generating gif..."));
                 getGiphy(search).then(res => {
-                    if (!res) return msg.edit(new MessageEmbed().setColor("RED").setDescription(`Sorry, something went wrong. Please try again. ${getExampleCommand(bot, 'gif')}`)) 
+                    if (!res) return msg.edit(new MessageEmbed().setColor("RED").setDescription(`:x: Sorry, something went wrong. Please try again. ${getExampleCommand(bot, 'gif')}`)) 
                     else {
                         let gif = res.data[0];
-                        return msg.edit(
+                        if (!gif) return msg.edit(new MessageEmbed().setColor("RED").setDescription(`:x: Sorry, could not locate a gif by that search query. ${getExampleCommand(bot, 'gif')}`))
+                        else return msg.edit(
                             new MessageEmbed()
                             .setColor(medium_purple)
                             .setTitle(gif.title)

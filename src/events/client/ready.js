@@ -2,6 +2,7 @@ const { MessageEmbed } = require('discord.js');
 const { prefix } = require('../../util/jsons/config.json');
 const { msToTime } = require('../../util/functions/musicFunctions');
 const { resetTripSpecificChannel } = require('../../util/functions/moderationFunctions');
+const { tarkovScrape } = require('../../util/functions/tarkovFunctions')
 
 module.exports = async (bot) => {
     console.log(`[LOGS] ${bot.user.username} is online!`)
@@ -36,9 +37,10 @@ module.exports = async (bot) => {
         .set("low", 0.10)
         .set("medium", 0.15)
         .set("high", 0.25);
+    tarkovScrape()
 
     resetTripSpecificChannel(bot);
-
+    
     let statuses = [
         `${prefix}help`,
         `over ${bot.guilds.cache.size} servers`

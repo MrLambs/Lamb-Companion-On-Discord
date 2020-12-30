@@ -16,7 +16,7 @@ module.exports = {
         usage: `[item to price check]`,
         description: "Check the stats of a player on RuneScape",
         accessibleby: "Members",
-        category: "osrs"
+        category: "old_school_runescape"
     },
     run: async (bot, message, args) => {
         if (!args) return message.channel.send(new MessageEmbed().setColor("RED").setDescription(`You need to enter an item for me to search! ${getExampleCommand(bot, 'rsprice')}`))

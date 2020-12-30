@@ -16,7 +16,7 @@ module.exports = {
         usage: `[RuneScape username]`,
         description: "Check the stats of a player on RuneScape",
         accessibleby: "Members",
-        category: "osrs"
+        category: "old_school_runescape"
     },
     run: async (bot, message, args) => {
         let userToSearch = args[0]

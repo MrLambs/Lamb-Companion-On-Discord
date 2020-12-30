@@ -9,7 +9,7 @@ module.exports = {
         usage: ``,
         description: "Check what's for sale in the Shepherd's Market",
         accessableby: "Members",
-        category: "casino"
+        category: "economy"
     },
     run: async (bot, message, args) => {
         return message.channel.send(

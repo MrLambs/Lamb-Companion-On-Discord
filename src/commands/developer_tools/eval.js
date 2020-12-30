@@ -10,7 +10,7 @@ module.exports = {
         usage: `[code or script]`,
         accessibleby: "Owner",
         aliases: ["e"],
-        category: "moderation"
+        category: "developer_tools"
     },
     run: async (bot, message, args) => {
         try {

@@ -12,7 +12,7 @@ module.exports = {
         usage: `[amount] [tag a member]`,
         description: "Inflate their bank account!",
         accessableby: "Members",
-        category: "casino"
+        category: "economy"
     },
     run: async (bot, message, args) => {
         try {   

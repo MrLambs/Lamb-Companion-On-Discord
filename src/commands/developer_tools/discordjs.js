@@ -8,7 +8,7 @@ module.exports = {
         usage: ``,
         description: "test command",
         accessibleby: "Members",
-        category: "misc"
+        category: "developer_tools"
     },
     run: async (bot, message, args) => {
         try {
@@ -21,7 +21,6 @@ module.exports = {
 
             let res = await fetch(`https://djsdocs.sorta.moe/v2/embed?src=stable&q=${encodeURIComponent(query)}`);
             let json = await res.json();
-
             if (!json) throw new Error(`No Result Found!`);
             else {
                 let djsEmbed = new MessageEmbed()

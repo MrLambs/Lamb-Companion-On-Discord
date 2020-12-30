@@ -9,7 +9,7 @@ module.exports = {
         usage: `[command name]`,
         description: "Shuts the bot down",
         accessibleby: "owner",
-        category: "moderation"
+        category: "developer_tools"
     },
     run: async (bot, message, args) => {
         if (message.author.id !== my_discord_id) return message.channel.send(new MessageEmbed().setColor("RED").setDescription(`:x: You do not have permission to do that`));

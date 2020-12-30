@@ -3,10 +3,10 @@ const {
 } = require('events');
 
 const connect4 = {
-        red: "🔴",
-        white: "⚪",
-        yellow: "🟡"
-    }
+    red: "🔴",
+    white: "⚪",
+    yellow: "🟡"
+}
 const { red, white, yellow } = connect4
 
 const reactions = { "1️⃣": 1, "2️⃣": 2, "3️⃣": 3, "4️⃣": 4, "5️⃣": 5, "6️⃣": 6, "7️⃣": 7 }

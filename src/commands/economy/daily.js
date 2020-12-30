@@ -9,7 +9,7 @@ module.exports = {
         usage: ``,
         description: "Perform your daily activity to receive an award of Lambies.",
         accessableby: "Members",
-        category: "casino"
+        category: "economy"
     },
     run: async (bot, message, args) => {
         let timeout = 86400000;

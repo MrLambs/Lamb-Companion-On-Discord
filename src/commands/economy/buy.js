@@ -9,7 +9,7 @@ module.exports = {
         usage: ``,
         description: "Purchase an item for the Shepherd's Market",
         accessableby: "Members",
-        category: "casino"
+        category: "economy"
     },
     run: async (bot, message, args) => {
         let purchase = args.join(' ').toLowerCase();
