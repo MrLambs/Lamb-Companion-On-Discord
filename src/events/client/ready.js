@@ -3,6 +3,8 @@ const { prefix } = require('../../util/jsons/config.json');
 const { msToTime } = require('../../util/functions/musicFunctions');
 const { resetTripSpecificChannel } = require('../../util/functions/moderationFunctions');
 const { tarkovScrape } = require('../../util/functions/tarkovFunctions')
+const { stripIndents } = require('common-tags')
+const createBar = require("string-progressbar");
 
 module.exports = async (bot) => {
     console.log(`[LOGS] ${bot.user.username} is online!`)
@@ -14,10 +16,16 @@ module.exports = async (bot) => {
             player.setVolume(25)
             let npEmbed = new MessageEmbed()
                 .setColor("GREEN")
-                .setDescription(`▶️ Now playing: **${track.title}** \`${msToTime(track.duration)}\``)
-                .setFooter(`Volume set to 25. To adjust volume please use: !volume 1-100`)
+                .setThumbnail(track.thumbnail)
+                .setDescription(stripIndents`
+                ▶️ Now playing: 
                 
-                bot.channels.cache
+                **${track.title}** \`${msToTime(track.duration)}\`
+                `)
+                .addField("\u200b", "**" + createBar((player.queue.current.duration == 0 ? player.position : player.queue.current.duration), 0, 10, "▬", "🔵")[0] + "**\n**" + new Date(player.position).toISOString().substr(11, 8) + " / " + (player.queue.current.duration == 0 ? " ◉ LIVE" : new Date(player.queue.current.duration).toISOString().substr(11, 8)) + "**")
+                .setFooter(`Volume set to 25. To adjust volume please use: !volume 1-100`)
+
+            bot.channels.cache
                 .get(player.textChannel)
                 .send(npEmbed)
                 .then(m => m.delete({ timeout: 15000 }))
@@ -40,7 +48,7 @@ module.exports = async (bot) => {
     tarkovScrape()
 
     resetTripSpecificChannel(bot);
-    
+
     let statuses = [
         `${prefix}help`,
         `over ${bot.guilds.cache.size} servers`

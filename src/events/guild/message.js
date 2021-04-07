@@ -12,7 +12,12 @@ module.exports = async (bot, message) => {
     let args = message.content.slice(prefix.length).trim().split(/ +/g);
     let cmd = args.shift().toLowerCase();
 
-    if (message.content.startsWith(prefix)) {
+    const tableFlipArr = ['(ノಠ益ಠ)ノ彡┻━┻', '(┛ಠ_ಠ)┛彡┻━┻', '(╯°□°)╯︵ ┻━┻', '(┛◉Д◉)┛彡┻━┻']
+
+    if (message.content.toLowerCase().includes('bad bot')) return message.channel.send('😢')
+    else if (message.content.toLowerCase().includes('good bot')) return message.channel.send(getEmoji(bot, '475742289378017280'))
+    else if (tableFlipArr.includes(message.content.toLowerCase())) return message.channel.send('┬─┬ノ( º _ ºノ)')
+    else if (message.content.startsWith(prefix)) {
         let commandFile = bot.commands.get(cmd) || bot.commands.get(bot.aliases.get(cmd))
 
         if (commandFile) {

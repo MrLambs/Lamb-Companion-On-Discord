@@ -1,9 +1,9 @@
 const { MessageEmbed } = require('discord.js');
 const { stripIndents } = require("common-tags");
 const { msToTime, getGuildPlayer } = require('../../util/functions/musicFunctions');
+const createBar = require("string-progressbar");
 
-
-module.exports = { 
+module.exports = {
     config: {
         name: "pause",
         aliases: ["resume"],
@@ -16,25 +16,26 @@ module.exports = {
         const { title, author, duration, thumbnail } = player.queue.current;
         message.react(`${player.playing ? "⏸️" : "▶️"}`);
         try {
-        let nsEmbed = new MessageEmbed()
-        .setColor("RED")
-        .setDescription(":x: No songs currently playing in this guild.")
-        if (!player) return message.channel.send(nsEmbed);
+            let nsEmbed = new MessageEmbed()
+                .setColor("RED")
+                .setDescription(":x: No songs currently playing in this guild.")
+            if (!player) return message.channel.send(nsEmbed);
 
-        const voiceChannel = message.member.voice.channel;
-        let vcEmbed = new MessageEmbed()
-        .setColor("RED")
-        .setDescription(":x: You need to be in a voice channel to pause music.")
-        if (!voiceChannel) return message.channel.send(vcEmbed);
-        
+            const voiceChannel = message.member.voice.channel;
+            let vcEmbed = new MessageEmbed()
+                .setColor("RED")
+                .setDescription(":x: You need to be in a voice channel to pause music.")
+            if (!voiceChannel) return message.channel.send(vcEmbed);
 
-        player.pause(player.playing);
-        let pEmbed = new MessageEmbed()
-        .setColor("GREEN")
-        .setDescription(stripIndents`
+
+            player.pause(player.playing);
+            let pEmbed = new MessageEmbed()
+                .setColor("GREEN")
+                .setDescription(stripIndents`
         ${player.playing ? "▶️" : "⏸️"} **${title}** \`${msToTime(duration)}\` by ${author}
-        `);        
-        return message.channel.send(pEmbed);
+        `)
+                .addField("\u200b", "**" + createBar((player.queue.current.duration == 0 ? player.position : player.queue.current.duration), player.position, 10, "▬", "🔵")[0] + "**\n**" + new Date(player.position).toISOString().substr(11, 8) + " / " + (player.queue.current.duration == 0 ? " ◉ LIVE" : new Date(player.queue.current.duration).toISOString().substr(11, 8)) + "**")
+            return message.channel.send(pEmbed);
         } catch (e) {
             console.log(`[ERR] ${e.message}`);
         }

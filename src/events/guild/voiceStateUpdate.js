@@ -1,9 +1,30 @@
 const { MessageEmbed } = require("discord.js");
+const ms = require('ms')
 const { stripIndents } = require('common-tags')
 const { logs_color } = require('../../util/jsons/colors.json')
 
 module.exports = async (client, oldState, newState) => {
   try {
+    const settings = {
+      "leaveOnEmpty_Channel": {
+        "enabled": true,
+        "time_delay": 30000
+      },
+    }
+    if (settings.leaveOnEmpty_Channel.enabled && oldState && oldState.channel) {
+      const player = client.manager.players.get(oldState.guild.id);
+      if (player && oldState.guild.channels.cache.get(player.voiceChannel).members.size === 1) {
+        setTimeout(() => {
+          if (player && oldState.guild.channels.cache.get(player.voiceChannel).members.size === 1) {
+            client.channels.cache
+              .get(player.textChannel)
+              .send(new MessageEmbed().setColor('RED').setDescription(`:x: Disconnected from channel because it was empty for ${ms(settings.leaveOnEmpty_Channel.time_delay, { long: true })}`));
+            player.destroy();
+          }
+        }, settings.leaveOnEmpty_Channel.time_delay);
+      }
+    }
+
     let newUserChannel = newState.channelID;
     let oldUserChannel = oldState.channelID;
     let userID = newState.id;

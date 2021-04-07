@@ -25,13 +25,26 @@ module.exports = {
             const res = await bot.manager.search(args.join(' '), message.author).then(async res => {
                 switch (res.loadType) {
 
+                    case "LOAD_FAILED":
+                        throw res.exception;
+                        break;
+
+                    case "PLAYLIST_LOADED":
+                        throw { message: "Playlists are not supported with this command." };
+                        break;
+
                     case "TRACK_LOADED":
                         player.queue.add(res.tracks[0]);
                         let tlEmbed = new MessageEmbed()
                             .setColor("GREEN")
-                            .setDescription(`Adding **${track.title}** \`${msToTime(track.duration)}\` to playlist.`)
+                            .setThumbnail(res.tracks[0].thumbnail)
+                            .setDescription(stripIndents`
+                            Added **${res.tracks[0].title}** \`${msToTime(res.tracks[0].duration)}\` to playlist
+                            ${player.queue.length ? ("---\nPosition in queue: " + player.queue.length) : ""}
+                            `)
                         message.channel.send(tlEmbed); if (!player.playing) player.play()
                         break;
+
 
                     case "SEARCH_RESULT":
                         let index = 1;
@@ -54,11 +67,14 @@ module.exports = {
                         collector.on("collect", m => {
                             if (/cancel/i.test(m.content)) return collector.stop("cancelled")
 
-                            const track = tracks[Number(m.content) - 1];
-                            player.queue.add(track)
+                            const searchSelect = tracks[Number(m.content) - 1];
+                            player.queue.add(searchSelect)
                             let srEmbed = new MessageEmbed()
                                 .setColor("GREEN")
-                                .setDescription(`Adding **${track.title}** \`${msToTime(track.duration)}\`to playlist.`)
+                                .setDescription(stripIndents`
+                            Added **${res.tracks[0].title}** \`${msToTime(res.tracks[0].duration)}\` to playlist
+                            ${player.queue.length ? ("---\nPosition in queue: " + player.queue.length) : ""}
+                            `)
                             if (!player.playing) player.play();
                             message.channel.send(srEmbed);
                         });
@@ -69,7 +85,7 @@ module.exports = {
                         break;
                 }
             })
-            player.connect();
+            if (!player.playing) player.connect();
         } catch (err) {
             console.log(`[ERR] ${err.message}`)
         }

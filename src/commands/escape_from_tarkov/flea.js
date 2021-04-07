@@ -40,7 +40,7 @@ module.exports = {
                         if (found.length === 1) {
                             resEmbed
                                 .setDescription(stripIndents`
-                        **[${found[0].name}](${found[0].link})**
+                        **[${found[0].name}](${found[0].wikiLink})**
                         24hr Price Avg: **${addCommas(Number(found[0].avg24hPrice)) + " ₽"}**
                         Slots: **${found[0].slots}**
                         Price Per Slot: **${addCommas(Number(found[0].pricePerSlot)) + " ₽"}**
