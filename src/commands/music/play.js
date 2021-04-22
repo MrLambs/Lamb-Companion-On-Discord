@@ -32,7 +32,7 @@ module.exports = {
 
                     case "PLAYLIST_LOADED":
                         let enqueing = await message.channel.send(new MessageEmbed().setColor('GREEN').setDescription(':mag: Powering up playlist using genetically enhanced hamsters...'))
-                        res.tracks.forEach(track => {
+                        await res.tracks.forEach(track => {
                             player.queue.add(track);
                         });
                         enqueing.edit(new MessageEmbed().setColor('GREEN').setDescription(`:white_check_mark: [${res.playlist.name}](${args[0]}) \`${msToTime(res.playlist.duration)}\` enqueued.`).setFooter(`Playlist length: ${player.playing ? player.queue.length : player.queue.length + 1}`))
@@ -41,6 +41,7 @@ module.exports = {
 
                     case "TRACK_LOADED":
                         player.queue.add(res.tracks[0]);
+                        if (res.tracks[0].resolve) await res.tracks[0].resolve()
                         let tlEmbed = new MessageEmbed()
                             .setColor("GREEN")
                             .setThumbnail(res.tracks[0].thumbnail)
