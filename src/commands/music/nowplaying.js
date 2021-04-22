@@ -15,16 +15,17 @@ module.exports = {
         const player = getGuildPlayer(bot, message);
         try {
             if (!player || !player.queue.current) return message.channel.send("No song(s) currently playing within this guild.");
-            const { title, author, duration, thumbnail } = player.queue.current;
-
+            const { title, author, duration, thumbnail, uri, requester } = player.queue.current;
+            
             const embed = new MessageEmbed()
                 .setAuthor("Now Playing", message.author.displayAvatarURL)
                 .setThumbnail(thumbnail)
                 .setColor("GREEN")
                 .setDescription(stripIndents`
-            ${player.playing ? "▶️" : "⏸️"} **${title}** \`${msToTime(duration)}\` by ${author}
+            ${player.playing ? "▶️" : "⏸️"} [${title}](${uri}) \`${msToTime(duration)}\` by ${author}
+            [${requester}]
             `)
-                .addField("\u200b", "**" + createBar((player.queue.current.duration == 0 ? player.position : player.queue.current.duration), player.position, 10, "▬", "🔵")[0] + "**\n**" + new Date(player.position).toISOString().substr(11, 8) + " / " + (player.queue.current.duration == 0 ? " ◉ LIVE" : new Date(player.queue.current.duration).toISOString().substr(11, 8)) + "**")
+            .addField("\u200b", "**" + createBar((player.queue.current.duration == 0 ? player.position : player.queue.current.duration), player.position, 10, "▬", "🔵")[0] + "**\n**" + new Date(player.position).toISOString().substr(11, 8) + " / " + (player.queue.current.duration == 0 ? " ◉ LIVE" : new Date(player.queue.current.duration).toISOString().substr(11, 8)) + "**")
                 ;
 
             return message.channel.send(embed);

@@ -20,10 +20,14 @@ module.exports = async (bot) => {
                 .setDescription(stripIndents`
                 ▶️ Now playing: 
                 
-                **${track.title}** \`${msToTime(track.duration)}\`
+                [${track.title}](${track.uri}) \`${new Date(track.duration) === 'Invalid Date' ? '' : msToTime(track.duration)}\`
+                [${track.requester}]
                 `)
-                .addField("\u200b", "**" + createBar((player.queue.current.duration == 0 ? player.position : player.queue.current.duration), 0, 10, "▬", "🔵")[0] + "**\n**" + new Date(player.position).toISOString().substr(11, 8) + " / " + (player.queue.current.duration == 0 ? " ◉ LIVE" : new Date(player.queue.current.duration).toISOString().substr(11, 8)) + "**")
                 .setFooter(`Volume set to 25. To adjust volume please use: !volume 1-100`)
+            if (!new Date(track.duration) === 'Invalid Date') {
+                npEmbed
+                    .addField("\u200b", "**" + createBar((player.queue.current.duration == 0 ? player.position : player.queue.current.duration), 0, 10, "▬", "🔵")[0] + "**\n**" + new Date(0).toISOString().substr(11, 8) + " / " + (player.queue.current.duration == 0 ? " ◉ LIVE" : new Date(player.queue.current.duration).toISOString().substr(11, 8)) + "**")
+            }
 
             bot.channels.cache
                 .get(player.textChannel)

@@ -33,7 +33,7 @@ module.exports = {
                 **__Avaliable commands__ for ${message.guild.me.displayName}**
                 ---
                 `)
-                embed.setFooter(`© ${message.guild.me.displayName} | Total Commands: ${bot.commands.size}`, bot.user.displayAvatarURL);
+                embed.setFooter(`© ${message.guild.me.displayName} | Total Commands: ${bot.commands.size}`, bot.user.displayAvatarURL());
 
                 categories.forEach(category => {
                     let newCat;

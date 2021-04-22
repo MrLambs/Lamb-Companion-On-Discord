@@ -1,12 +1,13 @@
 const { MessageEmbed } = require("discord.js");
 const { stripIndents } = require("common-tags");
 const { createMusicPlayer, msToTime } = require('../../util/functions/musicFunctions');
+const { search } = require("google-play-scraper");
 
 module.exports = {
     config: {
         name: "play",
         description: "Play a song/playlist or search for a song from youtube",
-        usage: "<input>",
+        usage: "<YouTube, Spotify, Deezer link to song/playlist or a search query>",
         category: "music",
         accessibleby: "Member",
         aliases: ["p"]
@@ -30,7 +31,12 @@ module.exports = {
                         break;
 
                     case "PLAYLIST_LOADED":
-                        throw { message: "Playlists are not supported with this command." };
+                        let enqueing = await message.channel.send(new MessageEmbed().setColor('GREEN').setDescription(':mag: Powering up playlist using genetically enhanced hamsters...'))
+                        res.tracks.forEach(track => {
+                            player.queue.add(track);
+                        });
+                        enqueing.edit(new MessageEmbed().setColor('GREEN').setDescription(`:white_check_mark: [${res.playlist.name}](${args[0]}) \`${msToTime(res.playlist.duration)}\` enqueued.`).setFooter(`Playlist length: ${player.playing ? player.queue.length : player.queue.length + 1}`))
+                        if (!player.playing) player.play()
                         break;
 
                     case "TRACK_LOADED":
@@ -39,10 +45,11 @@ module.exports = {
                             .setColor("GREEN")
                             .setThumbnail(res.tracks[0].thumbnail)
                             .setDescription(stripIndents`
-                            Added **${res.tracks[0].title}** \`${msToTime(res.tracks[0].duration)}\` to playlist
+                            :white_check_mark: Added [${res.tracks[0].title}](${res.tracks[0].uri}) \`${msToTime(res.tracks[0].duration)}\` to playlist [${res.tracks[0].requester}]
                             ${player.queue.length ? ("---\nPosition in queue: " + player.queue.length) : ""}
                             `)
-                        message.channel.send(tlEmbed); if (!player.playing) player.play()
+                        message.channel.send(tlEmbed);
+                        if (!player.playing) player.play()
                         break;
 
 
@@ -72,7 +79,7 @@ module.exports = {
                             let srEmbed = new MessageEmbed()
                                 .setColor("GREEN")
                                 .setDescription(stripIndents`
-                            Added **${res.tracks[0].title}** \`${msToTime(res.tracks[0].duration)}\` to playlist
+                            :white_check_mark: Added [${searchSelect.title}](${searchSelect.uri}) \`${msToTime(searchSelect.duration)}\` to playlist [${searchSelect.requester}]
                             ${player.queue.length ? ("---\nPosition in queue: " + player.queue.length) : ""}
                             `)
                             if (!player.playing) player.play();

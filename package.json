@@ -44,6 +44,7 @@
     "oldschooljs": "^1.4.1",
     "osrs-alchemy": "^2.0.1",
     "parse-ms": "^2.1.0",
+    "radio-browser": "^2.1.7",
     "request": "^2.88.2",
     "srod-v2": "^1.0.1",
     "string-progressbar": "^1.0.3"

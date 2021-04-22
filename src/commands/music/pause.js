@@ -13,7 +13,7 @@ module.exports = {
     },
     run: (bot, message, args) => {
         const player = getGuildPlayer(bot, message);
-        const { title, author, duration, thumbnail } = player.queue.current;
+        const { title, author, duration, thumbnail, uri, requester } = player.queue.current;
         message.react(`${player.playing ? "⏸️" : "▶️"}`);
         try {
             let nsEmbed = new MessageEmbed()
@@ -31,8 +31,10 @@ module.exports = {
             player.pause(player.playing);
             let pEmbed = new MessageEmbed()
                 .setColor("GREEN")
+                .setThumbnail(thumbnail)
                 .setDescription(stripIndents`
-        ${player.playing ? "▶️" : "⏸️"} **${title}** \`${msToTime(duration)}\` by ${author}
+        ${player.playing ? "▶️" : "⏸️"} [${title}](${uri}) \`${msToTime(duration)}\` by ${author}
+        [${requester}]
         `)
                 .addField("\u200b", "**" + createBar((player.queue.current.duration == 0 ? player.position : player.queue.current.duration), player.position, 10, "▬", "🔵")[0] + "**\n**" + new Date(player.position).toISOString().substr(11, 8) + " / " + (player.queue.current.duration == 0 ? " ◉ LIVE" : new Date(player.queue.current.duration).toISOString().substr(11, 8)) + "**")
             return message.channel.send(pEmbed);
