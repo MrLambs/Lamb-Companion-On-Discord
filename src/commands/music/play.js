@@ -1,7 +1,6 @@
 const { MessageEmbed } = require("discord.js");
 const { stripIndents } = require("common-tags");
 const { createMusicPlayer, msToTime } = require('../../util/functions/musicFunctions');
-const { search } = require("google-play-scraper");
 
 module.exports = {
     config: {
@@ -35,7 +34,7 @@ module.exports = {
                         await res.tracks.forEach(track => {
                             player.queue.add(track);
                         });
-                        enqueing.edit(new MessageEmbed().setColor('GREEN').setDescription(`:white_check_mark: [${res.playlist.name}](${args[0]}) \`${msToTime(res.playlist.duration)}\` enqueued.`).setFooter(`Playlist length: ${player.playing ? player.queue.length : player.queue.length + 1}`))
+                        enqueing.edit(new MessageEmbed().setColor('GREEN').setDescription(`:white_check_mark: Enqueued playlist [${ res.playlist.name }](${ args[0] }) \`${ msToTime(res.playlist.duration) }\` [${ res.tracks[0].requester }].`).setFooter(`Playlist length: ${ player.playing ? player.queue.length : player.queue.length + 1 }`))
                         if (!player.playing) player.play()
                         break;
 
@@ -46,48 +45,45 @@ module.exports = {
                             .setColor("GREEN")
                             .setThumbnail(res.tracks[0].thumbnail)
                             .setDescription(stripIndents`
-                            :white_check_mark: Added [${res.tracks[0].title}](${res.tracks[0].uri}) \`${msToTime(res.tracks[0].duration)}\` to playlist [${res.tracks[0].requester}]
-                            ${player.queue.length ? ("---\nPosition in queue: " + player.queue.length) : ""}
+                            :white_check_mark: Queued [${ res.tracks[0].title }](${ res.tracks[0].uri }) \`${ msToTime(res.tracks[0].duration) }\` [${ res.tracks[0].requester }]
+                            ${ player.queue.length ? ("---\nPosition in queue: " + player.queue.length) : "" }
                             `)
                         message.channel.send(tlEmbed);
                         if (!player.playing) player.play()
                         break;
-
 
                     case "SEARCH_RESULT":
                         let index = 1;
                         const tracks = res.tracks.slice(0, 5);
                         const embed = new MessageEmbed()
                             .setColor("GREEN")
-                            .setAuthor(`${message.author.username}, please choose a song`, message.author.displayAvatarURL)
                             .setDescription(stripIndents`
-                        :mag: ___Song Selection___
-                        ${tracks.map(video => `\n**${index++} -** ${video.title}`)}
+                        :mag: ${ message.author }, please choose a song
+                        ${ tracks.map(video => `\n**${ index++ } -** [${ video.title }](${ video.uri })`) }
                         `)
                             .setFooter("Your response time closes within the next 30 seconds. Type 'cancel' to cancel the selection");
+                        message.channel.send(embed)
 
-                        await message.channel.send(embed);
-
-                        const collector = message.channel.createMessageCollector(m => {
+                        const messageCollector = message.channel.createMessageCollector(m => {
                             return m.author.id === message.author.id && new RegExp(`^([1-5]|cancel)$`, "i").test(m.content)
                         }, { time: 30000, max: 1 });
 
-                        collector.on("collect", m => {
-                            if (/cancel/i.test(m.content)) return collector.stop("cancelled")
+                        messageCollector.on("collect", m => {
+                            if (/cancel/i.test(m.content)) return messageCollector.stop("cancelled")
 
                             const searchSelect = tracks[Number(m.content) - 1];
                             player.queue.add(searchSelect)
                             let srEmbed = new MessageEmbed()
                                 .setColor("GREEN")
                                 .setDescription(stripIndents`
-                            :white_check_mark: Added [${searchSelect.title}](${searchSelect.uri}) \`${msToTime(searchSelect.duration)}\` to playlist [${searchSelect.requester}]
-                            ${player.queue.length ? ("---\nPosition in queue: " + player.queue.length) : ""}
+                            :white_check_mark: Queued [${ searchSelect.title }](${ searchSelect.uri }) \`${ msToTime(searchSelect.duration) }\` [${ searchSelect.requester }]
+                            ${ player.queue.length ? ("---\nPosition in queue: " + player.queue.length) : "" }
                             `)
                             if (!player.playing) player.play();
                             message.channel.send(srEmbed);
                         });
 
-                        collector.on("end", (_, reason) => {
+                        messageCollector.on("end", (_, reason) => {
                             if (["time", "cancelled"].includes(reason)) return message.channel.send(new MessageEmbed().setColor('RED').setDescription(":x: Cancelled selection."))
                         });
                         break;
@@ -95,7 +91,8 @@ module.exports = {
             })
             if (!player.playing) player.connect();
         } catch (err) {
-            console.log(`[ERR] ${err.message}`)
+            console.log(`[ERR] ${ err.message }`)
+            return message.channel.send(new MessageEmbed().setColor("RED").setDescription(`:x: ${ err.message } [${ message.author }]`))
         }
     }
 }

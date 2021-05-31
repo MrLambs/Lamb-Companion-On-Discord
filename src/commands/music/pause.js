@@ -1,6 +1,7 @@
 const { MessageEmbed } = require('discord.js');
 const { stripIndents } = require("common-tags");
 const { msToTime, getGuildPlayer } = require('../../util/functions/musicFunctions');
+const { getEmoji } = require('../../util/functions/chatFunctions')
 const createBar = require("string-progressbar");
 
 module.exports = {
@@ -36,7 +37,7 @@ module.exports = {
         ${player.playing ? "▶️" : "⏸️"} [${title}](${uri}) \`${msToTime(duration)}\` by ${author}
         [${requester}]
         `)
-                .addField("\u200b", "**" + createBar((player.queue.current.duration == 0 ? player.position : player.queue.current.duration), player.position, 10, "▬", "🔵")[0] + "**\n**" + new Date(player.position).toISOString().substr(11, 8) + " / " + (player.queue.current.duration == 0 ? " ◉ LIVE" : new Date(player.queue.current.duration).toISOString().substr(11, 8)) + "**")
+                .addField("\u200b", "**" + createBar((player.queue.current.duration == 0 ? player.position : player.queue.current.duration), player.position, 10, "▬", `${getEmoji(bot, '475742289378017280')}`)[0] + "**\n**" + new Date(player.position).toISOString().substr(11, 8) + " / " + (player.queue.current.duration == 0 ? " ◉ LIVE" : new Date(player.queue.current.duration).toISOString().substr(11, 8)) + "**")
             return message.channel.send(pEmbed);
         } catch (e) {
             console.log(`[ERR] ${e.message}`);

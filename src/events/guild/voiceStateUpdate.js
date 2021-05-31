@@ -3,14 +3,15 @@ const ms = require('ms')
 const { stripIndents } = require('common-tags')
 const { logs_color } = require('../../util/jsons/colors.json')
 
+const settings = {
+  "leaveOnEmpty_Channel": {
+    "enabled": true,
+    "time_delay": 30000
+  }
+}
+
 module.exports = async (client, oldState, newState) => {
   try {
-    const settings = {
-      "leaveOnEmpty_Channel": {
-        "enabled": true,
-        "time_delay": 30000
-      },
-    }
     if (settings.leaveOnEmpty_Channel.enabled && oldState && oldState.channel) {
       const player = client.manager.players.get(oldState.guild.id);
       if (player && oldState.guild.channels.cache.get(player.voiceChannel).members.size === 1) {
@@ -33,10 +34,18 @@ module.exports = async (client, oldState, newState) => {
     if (!newUserChannel) guildID = oldState.guild.id;
     else guildID = newState.guild.id;
 
-    if (guildID == "323715376519184385" && newUserChannel) {
-      if (oldUserChannel === newUserChannel) return;
-      else if (newUserChannel == '751422335570935829') {
-        user.send(stripIndents`
+    if (user.bot) return;
+    else {
+      let didChange = false;
+      const embed = new MessageEmbed()
+        .setTitle('Voice Status Change')
+        .setColor(logs_color)
+        .setTimestamp()
+        .setFooter('Logs');
+      if (!oldUserChannel && newUserChannel) {
+        //joined a voice channel
+        if (guildID == "323715376519184385" && newUserChannel == '751422335570935829') {
+          user.send(stripIndents`
                 Welcome to The Sheep Pen's Live Stream Voice Chat!!
 
         Please refrain from using **__ANY of the following__** in an offensive manner while in the chat.
@@ -51,18 +60,7 @@ module.exports = async (client, oldState, newState) => {
 
         ***Moderators reserve the right to enforce punishments based on their observance of your behavior and their own perception of any situation. Unless otherwise contacted by a Moderator or Owner, all decisions are final and should be considered permanent.***
         `)
-      }
-    } else if (user.bot) return;
-    else {
-      let didChange = false;
-      const embed = new MessageEmbed()
-        .setTitle('Voice Status Change')
-        .setColor(logs_color)
-        .setTimestamp()
-        .setFooter('Logs');
-
-      if (!oldUserChannel && newUserChannel) {
-        //joined a voice channel
+        }
         didChange = true;
         embed.setDescription(`<@${newState.id}> joined the <#${newUserChannel}> voice channel`)
       } else if (!newUserChannel) {
